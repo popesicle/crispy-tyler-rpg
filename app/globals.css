@@ -1,27 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --amber: #c8a45a;
+  --amber-dim: #a07838;
+  --amber-deep: #3d2e0f;
+  --olive: #7a8e48;
+  --olive-dim: #5a6e32;
+  --concrete: #a8a4a0;
+  --concrete-light: #ccc9c2;
+  --concrete-dark: #524f4a;
+  --off-white: #e8e4d9;
+  --shadow: #1a1916;
+  --paper: #d4cfc0;
+  --red-stamp: #b02020;
+  --ink: #1c1a15;
+  --bg: #2a2822;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ──────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--off-white);
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 16px;
+  min-height: 100vh;
+  position: relative;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Subtle grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Ensure content sits above grain */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Typography ─────────────────────────────────────────── */
+h1, h2, h3, .display {
+  font-family: 'Special Elite', 'Georgia', serif;
+}
+
+/* ── Section Labels ─────────────────────────────────────── */
+.section-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--amber-dim);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--concrete-dark);
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.roster-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--concrete-dark);
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.roster-row:hover {
+  border-color: var(--amber-dim);
+  background: rgba(200, 164, 90, 0.04);
+}
+
+.btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--amber-dim);
+  color: var(--amber);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn:hover {
+  background: var(--amber-deep);
+  color: var(--amber);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  border-color: var(--amber);
+  color: var(--off-white);
+}
+
+.btn-primary:hover {
+  background: var(--amber-dim);
+}
+
+.btn-danger {
+  border-color: var(--red-stamp);
+  color: var(--red-stamp);
+}
+
+.btn-danger:hover {
+  background: rgba(139, 26, 26, 0.2);
+}
+
+/* ── Inputs ─────────────────────────────────────────────── */
+.input {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--concrete-dark);
+  color: var(--off-white);
+  padding: 10px 12px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.input:focus {
+  border-color: var(--amber-dim);
+}
+
+.input::placeholder {
+  color: var(--concrete);
+  opacity: 0.6;
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ── Cards / Panels ──────────────────────────────────────── */
+.panel {
+  border: 1px solid var(--concrete-dark);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 16px;
+}
+
+.panel-amber {
+  border-color: var(--amber-deep);
+}
+
+/* ── Stamps ─────────────────────────────────────────────── */
+.stamp {
+  font-family: 'Special Elite', serif;
+  color: var(--red-stamp);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border: 2px solid var(--red-stamp);
+  padding: 2px 8px;
+  display: inline-block;
+  opacity: 0.85;
+}
+
+.stamp-rotated {
+  transform: rotate(-3deg);
+}
+
+/* ── Redacted ────────────────────────────────────────────── */
+.redacted {
+  background: var(--ink);
+  color: var(--ink);
+  user-select: none;
+  border-radius: 1px;
+}
+
+/* ── Pip Tracks ─────────────────────────────────────────── */
+.pip {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--concrete-dark);
+  cursor: pointer;
+  transition: background 0.1s;
+  display: inline-block;
+}
+
+.pip.filled {
+  background: var(--amber-dim);
+  border-color: var(--amber);
+}
+
+.pip.filled-stress {
+  background: var(--red-stamp);
+  border-color: #b02020;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--concrete-dark);
+}
+
+/* ── Desktop Scale-up ───────────────────────────────────── */
+@media (min-width: 1024px) {
+  body {
+    font-size: 20px;
+  }
+
+  .section-label {
+    font-size: 14px;
+    letter-spacing: 5px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 12px 26px;
+  }
+
+  .input {
+    font-size: 17px;
+    padding: 12px 14px;
+  }
+
+  .panel {
+    padding: 24px;
+  }
+
+  .pip {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Print Overrides ────────────────────────────────────── */
+@media print {
+  :root {
+    --bg: var(--paper);
+    --off-white: var(--ink);
+    --amber: #8a6e35;
+    --amber-dim: #6b5428;
+    --concrete-dark: #8a8880;
+    --red-stamp: #8b1a1a;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  body::before {
+    display: none;
+  }
+
+  .no-print {
+    display: none !important;
   }
 }

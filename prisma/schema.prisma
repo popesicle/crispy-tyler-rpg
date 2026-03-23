@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String      @id @default(cuid())
+  username   String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  characters Character[]
+}
+
+model Character {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  codename    String?
+  backstory   String?
+  attrs       Json
+  skills      Json
+  talent      String
+  talentDesc  String
+  armor       String
+  weapons     Json
+  expendables Json
+  bgTags      Json
+  fatigue     Int      @default(0)
+  stress      Int      @default(0)
+  clocks      Json     @default("[]")
+  activeAuras Json     @default("[]")
+  notes       String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

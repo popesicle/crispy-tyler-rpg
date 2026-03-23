@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: frc
+    env: node
+    buildCommand: npx prisma generate && npx prisma migrate deploy && next build
+    startCommand: next start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: frc-db
+          property: connectionString
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://your-render-url.onrender.com
+
+databases:
+  - name: frc-db
+    plan: free
