@@ -69,7 +69,7 @@ export default async function RosterPage() {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {characters.map((char) => (
+          {characters.map((char: typeof characters[number]) => (
             <Link
               key={char.id}
               href={`/character/${char.id}`}
