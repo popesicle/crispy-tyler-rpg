@@ -21,11 +21,12 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
   return (
     <>
       {/* Print button — hidden in actual print */}
-      <div className="no-print" style={{ padding: '16px 24px', borderBottom: '1px solid #ccc', background: '#f0ece0' }}>
+      <div className="no-print px-6 py-4 border-b bg-[#f0ece0]">
         <PrintTrigger />
         <a
           href={`/character/${c.id}`}
-          style={{ marginLeft: 16, fontFamily: '"Share Tech Mono", monospace', fontSize: 36, color: '#6b5428' }}
+          className="ml-4 font-mono text-[36px]"
+          style={{ color: '#6b5428' }}
         >
           ← Back to Tracker
         </a>
@@ -33,82 +34,54 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
       {/* Print sheet */}
       <div
+        className="font-mono min-h-screen px-10 py-8"
         style={{
           background: 'var(--paper)',
           color: 'var(--ink)',
-          minHeight: '100vh',
-          padding: '32px 40px',
-          fontFamily: '"Share Tech Mono", monospace',
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: 20, borderBottom: '2px solid var(--ink)', paddingBottom: 12 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div className="mb-5 border-b-2 pb-3" style={{ borderBottomColor: 'var(--ink)' }}>
+          <div className="flex justify-between items-start">
             <div>
               <div
-                style={{
-                  fontFamily: '"Special Elite", serif',
-                  fontSize: 17,
-                  letterSpacing: 5,
-                  color: '#6b5428',
-                  textTransform: 'uppercase',
-                  marginBottom: 4,
-                }}
+                className="font-display text-base tracking-[5px] uppercase mb-1"
+                style={{ color: '#6b5428' }}
               >
                 Federal Remediation Commission
               </div>
               <h1
-                style={{
-                  fontFamily: '"Special Elite", serif',
-                  fontSize: 36,
-                  color: 'var(--ink)',
-                  margin: 0,
-                  letterSpacing: 2,
-                }}
+                className="font-display text-[36px] m-0 tracking-[2px]"
+                style={{ color: 'var(--ink)' }}
               >
                 {c.name}
               </h1>
               {c.codename && (
-                <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 36, color: '#8a6e35', letterSpacing: 2, marginTop: 2 }}>
+                <div className="font-mono text-[36px] tracking-[2px] mt-0.5" style={{ color: '#8a6e35' }}>
                   &ldquo;{c.codename}&rdquo;
                 </div>
               )}
             </div>
-            <div style={{ textAlign: 'right' }}>
+            <div className="text-right">
               <div
+                className="font-display text-[30px] tracking-[4px] border-2 px-3 py-1 inline-block opacity-85"
                 style={{
-                  fontFamily: '"Special Elite", serif',
                   color: '#8b1a1a',
-                  fontSize: 30,
-                  letterSpacing: 4,
-                  border: '2px solid #8b1a1a',
-                  padding: '4px 12px',
+                  borderColor: '#8b1a1a',
                   transform: 'rotate(-3deg)',
-                  display: 'inline-block',
-                  opacity: 0.85,
                 }}
               >
                 FRC
               </div>
               <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 17,
-                  color: '#8a6e35',
-                  letterSpacing: 2,
-                  marginTop: 8,
-                }}
+                className="font-mono text-base tracking-[2px] mt-2"
+                style={{ color: '#8a6e35' }}
               >
                 {c.id.slice(0, 8).toUpperCase()}
               </div>
               <div
-                style={{
-                  fontFamily: '"Special Elite", serif',
-                  fontSize: 30,
-                  color: '#8b1a1a',
-                  letterSpacing: 3,
-                  marginTop: 2,
-                }}
+                className="font-display text-[30px] tracking-[3px] mt-0.5"
+                style={{ color: '#8b1a1a' }}
               >
                 CLEARANCE: ██████
               </div>
@@ -117,62 +90,54 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
         </div>
 
         {/* Two-column body */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+        <div className="grid grid-cols-2 gap-5 mb-5">
           {/* Left: Attributes + Tracks + Loadout */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div className="flex flex-col gap-3.5">
             <PrintSection label="Attributes">
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}>
+              <div className="grid grid-cols-3 gap-1">
                 {ATTR_KEYS.map((k) => (
                   <div
                     key={k}
-                    style={{
-                      border: '1px solid #8a8880',
-                      padding: '6px',
-                      textAlign: 'center',
-                    }}
+                    className="border px-1.5 py-1.5 text-center"
+                    style={{ borderColor: '#8a8880' }}
                   >
-                    <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--ink)' }}>
+                    <div className="font-display text-[30px]" style={{ color: 'var(--ink)' }}>
                       {c.attrs[k]}
                     </div>
-                    <div style={{ fontSize: 17, letterSpacing: 2, color: '#8a6e35' }}>{k}</div>
+                    <div className="text-base tracking-[2px]" style={{ color: '#8a6e35' }}>{k}</div>
                   </div>
                 ))}
               </div>
             </PrintSection>
 
             <PrintSection label={`Fatigue Track (max: CON ${c.attrs.CON})`}>
-              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+              <div className="flex gap-1 flex-wrap">
                 {Array.from({ length: c.attrs.CON }, (_, i) => (
-                  <div key={i} style={{ width: 20, height: 20, border: '1px solid #8a8880' }} />
+                  <div key={i} className="w-5 h-5 border" style={{ borderColor: '#8a8880' }} />
                 ))}
               </div>
-              <div style={{ fontSize: 17, color: '#8a8880', marginTop: 4, letterSpacing: 1 }}>
+              <div className="text-base mt-1" style={{ color: '#8a8880', letterSpacing: '0.05em' }}>
                 At {c.attrs.CON}: WOUNDED (−1 die physical) | Overflow: DOWN
               </div>
             </PrintSection>
 
             <PrintSection label={`Stress Track (max: WIS ${c.attrs.WIS})`}>
-              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+              <div className="flex gap-1 flex-wrap">
                 {Array.from({ length: c.attrs.WIS }, (_, i) => (
-                  <div key={i} style={{ width: 20, height: 20, border: '1px solid #8a8880' }} />
+                  <div key={i} className="w-5 h-5 border" style={{ borderColor: '#8a8880' }} />
                 ))}
               </div>
             </PrintSection>
 
             <PrintSection label="Loadout">
-              <div style={{ fontSize: 19, color: '#6b5428', marginBottom: 4, letterSpacing: 1 }}>
+              <div className="text-lg mb-1" style={{ color: '#6b5428', letterSpacing: '0.05em' }}>
                 {c.armor.toUpperCase()} ARMOR
               </div>
               {c.weapons.map((w, i) => (
                 <div
                   key={i}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '3px 0',
-                    borderBottom: '1px solid #ccc',
-                    fontSize: 19,
-                  }}
+                  className="flex justify-between py-0.75 border-b text-lg"
+                  style={{ borderBottomColor: '#ccc' }}
                 >
                   <span>{w.name}</span>
                   <span style={{ color: '#8a6e35' }}>{w.damage}</span>
@@ -182,46 +147,41 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
           </div>
 
           {/* Right: Skills + Talent + Expendables */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div className="flex flex-col gap-3.5">
             <PrintSection label="Skills">
               {expertSkill && (
-                <div style={{ marginBottom: 8 }}>
-                  <div style={{ fontSize: 17, letterSpacing: 2, color: '#8a6e35', marginBottom: 3 }}>EXPERT</div>
-                  <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--ink)' }}>
+                <div className="mb-2">
+                  <div className="text-base tracking-[2px] mb-0.75" style={{ color: '#8a6e35' }}>EXPERT</div>
+                  <div className="font-display text-[30px]" style={{ color: 'var(--ink)' }}>
                     {expertSkill.name}
                   </div>
-                  <div style={{ fontSize: 30, color: '#8a8880', letterSpacing: 1 }}>
+                  <div className="text-[30px] tracking-[0.05em]" style={{ color: '#8a8880' }}>
                     {expertSkill.specializations.join(' · ')}
                   </div>
                 </div>
               )}
-              <div style={{ fontSize: 17, letterSpacing: 2, color: '#8a8880', marginBottom: 3 }}>TRAINED</div>
+              <div className="text-base tracking-[2px] mb-0.75" style={{ color: '#8a8880' }}>TRAINED</div>
               {trainedSkills.map((s) => (
-                <div key={s.name} style={{ fontSize: 19, padding: '2px 0', borderBottom: '1px solid #ccc' }}>
+                <div key={s.name} className="text-lg py-0.5 border-b" style={{ borderBottomColor: '#ccc' }}>
                   {s.name}
                 </div>
               ))}
             </PrintSection>
 
             <PrintSection label="Talent">
-              <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, marginBottom: 4 }}>{c.talent}</div>
-              <div style={{ fontSize: 30, color: '#5a5a5a', lineHeight: 1.6 }}>{c.talentDesc}</div>
+              <div className="font-display text-[30px] mb-1">{c.talent}</div>
+              <div className="text-[30px] leading-relaxed" style={{ color: '#5a5a5a' }}>{c.talentDesc}</div>
             </PrintSection>
 
             <PrintSection label="Expendables">
               {c.expendables.map((e) => (
                 <div
                   key={e.name}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '3px 0',
-                    borderBottom: '1px solid #ccc',
-                  }}
+                  className="flex items-center gap-2 py-0.75 border-b"
+                  style={{ borderBottomColor: '#ccc' }}
                 >
-                  <div style={{ width: 12, height: 12, border: '1px solid #8a8880', flexShrink: 0 }} />
-                  <span style={{ fontSize: 19 }}>{e.name}</span>
+                  <div className="w-3 h-3 border shrink-0" style={{ borderColor: '#8a8880' }} />
+                  <span className="text-lg">{e.name}</span>
                 </div>
               ))}
             </PrintSection>
@@ -230,48 +190,40 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
         {/* Background Tags */}
         <PrintSection label="Background Tags">
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="flex gap-2 flex-wrap">
             {c.bgTags.map((tag) => (
               <div
                 key={tag}
+                className="text-lg border px-2.5 py-0.75"
                 style={{
-                  fontSize: 19,
-                  border: '1px solid #8a6e35',
-                  padding: '3px 10px',
-                  letterSpacing: 1,
+                  borderColor: '#8a6e35',
+                  letterSpacing: '0.05em',
                 }}
               >
                 {tag}
               </div>
             ))}
           </div>
-          <div style={{ fontSize: 17, color: '#8a8880', marginTop: 4, letterSpacing: 1 }}>
+          <div className="text-base mt-1" style={{ color: '#8a8880', letterSpacing: '0.05em' }}>
             Once per scene, when a tag applies: +1 die or 1 reroll.
           </div>
         </PrintSection>
 
         {/* Backstory */}
         {c.backstory && (
-          <div style={{ marginTop: 14 }}>
+          <div className="mt-3.5">
             <PrintSection label="Personnel Notes">
-              <p style={{ fontSize: 30, lineHeight: 1.7, margin: 0, color: '#5a5a5a' }}>{c.backstory}</p>
+              <p className="text-[30px] leading-relaxed m-0" style={{ color: '#5a5a5a' }}>{c.backstory}</p>
             </PrintSection>
           </div>
         )}
 
         {/* Footer */}
         <div
+          className="mt-6 pt-2 border-t flex justify-between font-mono text-[36px] uppercase tracking-[2px]"
           style={{
-            marginTop: 24,
-            paddingTop: 8,
-            borderTop: '1px solid #ccc',
-            display: 'flex',
-            justifyContent: 'space-between',
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 36,
+            borderTopColor: '#ccc',
             color: '#8a8880',
-            letterSpacing: 2,
-            textTransform: 'uppercase',
           }}
         >
           <span>FRC Form 7-OP — Operative Character Record</span>
@@ -286,15 +238,10 @@ function PrintSection({ label, children }: { label: string; children: React.Reac
   return (
     <div>
       <div
+        className="font-mono text-[36px] tracking-[4px] uppercase border-b pb-0.75 mb-2"
         style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 36,
-          letterSpacing: 4,
           color: '#8a6e35',
-          textTransform: 'uppercase',
-          borderBottom: '1px solid #8a8880',
-          paddingBottom: 3,
-          marginBottom: 8,
+          borderBottomColor: '#8a8880',
         }}
       >
         {label}

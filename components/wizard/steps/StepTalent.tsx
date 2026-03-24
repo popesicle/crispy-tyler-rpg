@@ -9,38 +9,24 @@ export default function StepTalent({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Special Capabilities</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Talent
       </h2>
 
-      <div
-        style={{
-          padding: '10px 14px',
-          border: '1px solid var(--amber-deep)',
-          background: 'rgba(61,46,15,0.2)',
-          marginBottom: 28,
-        }}
-      >
+      <div className="p-3 border border-amber-deep bg-amber-deep/20 mb-7">
         <p
-          style={{
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 19,
-            color: 'var(--concrete-light)',
-            letterSpacing: 1,
-            margin: 0,
-            lineHeight: 1.6,
-          }}
+          className="font-mono text-base text-concrete-light tracking-wide m-0 leading-relaxed"
         >
-          <span style={{ color: 'var(--amber)', fontWeight: 'bold' }}>RULE:</span> Talents bend or break
+          <span className="text-amber font-bold">RULE:</span> Talents bend or break
           a rule once per scene. Write a specific, situational ability — not a passive stat boost.
           Define when it triggers, what it does, and any limits.
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div className="flex flex-col gap-5">
         <div>
-          <label style={labelStyle}>
-            Talent Name <span style={{ color: 'var(--red-stamp)' }}>*</span>
+          <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">
+            Talent Name <span className="text-red-stamp">*</span>
           </label>
           <input
             className="input"
@@ -52,8 +38,8 @@ export default function StepTalent({ state, onChange }: Props) {
         </div>
 
         <div>
-          <label style={labelStyle}>
-            Talent Description <span style={{ color: 'var(--red-stamp)' }}>*</span>
+          <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">
+            Talent Description <span className="text-red-stamp">*</span>
           </label>
           <textarea
             className="input"
@@ -66,37 +52,18 @@ export default function StepTalent({ state, onChange }: Props) {
       </div>
 
       {/* Example talent reference */}
-      <div style={{ marginTop: 28 }}>
-        <div className="section-label" style={{ marginBottom: 12 }}>Examples from reference builds</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div className="mt-7">
+        <div className="section-label mb-3">Examples from reference builds</div>
+        <div className="flex flex-col gap-1.5">
           {EXAMPLE_TALENTS.map((ex) => (
             <div
               key={ex.name}
-              style={{
-                padding: '10px 14px',
-                border: '1px solid var(--concrete-dark)',
-                background: 'rgba(255,255,255,0.02)',
-              }}
+              className="p-3 border border-concrete-dark bg-white/[0.02]"
             >
-              <div
-                style={{
-                  fontFamily: '"Special Elite", serif',
-                  fontSize: 30,
-                  color: 'var(--off-white)',
-                  marginBottom: 4,
-                }}
-              >
+              <div className="font-display text-2xl text-off-white mb-1">
                 {ex.name}
               </div>
-              <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
-                  color: 'var(--concrete)',
-                  letterSpacing: 1,
-                  lineHeight: 1.5,
-                }}
-              >
+              <div className="font-mono text-2xl text-concrete tracking-wide leading-relaxed">
                 {ex.desc}
               </div>
             </div>
@@ -121,13 +88,3 @@ const EXAMPLE_TALENTS = [
     desc: "Once per scene, before making a roll, ask the GM for a brief premonition. If you follow the vision's guidance, gain +1 die on the next relevant roll.",
   },
 ]
-
-const labelStyle: React.CSSProperties = {
-  display: 'block',
-  fontFamily: '"Share Tech Mono", monospace',
-  fontSize: 30,
-  letterSpacing: 3,
-  color: 'var(--amber-dim)',
-  textTransform: 'uppercase',
-  marginBottom: 6,
-}

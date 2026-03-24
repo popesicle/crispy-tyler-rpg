@@ -37,52 +37,31 @@ export default function StepBackgroundTags({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Service Record</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Background Tags
       </h2>
 
-      <div
-        style={{
-          padding: '12px 14px',
-          border: '1px solid var(--amber-deep)',
-          background: 'rgba(61,46,15,0.2)',
-          marginBottom: 28,
-        }}
-      >
+      <div className="p-3 border border-amber-deep bg-amber-deep/20 mb-7">
         <p
-          style={{
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 19,
-            color: 'var(--concrete-light)',
-            letterSpacing: 1,
-            margin: 0,
-            lineHeight: 1.6,
-          }}
+          className="font-mono text-base text-concrete-light tracking-wide m-0 leading-relaxed"
         >
-          <span style={{ color: 'var(--amber)' }}>RULE:</span> Once per scene, when a background tag
+          <span className="text-amber">RULE:</span> Once per scene, when a background tag
           clearly applies to the situation, you gain <strong>+1 die or 1 reroll</strong>.
           Tags represent who you were before the FRC — prior professions, defining experiences,
           unusual circumstances.
         </p>
       </div>
 
-      <div style={{ marginBottom: 20 }}>
-        <div className="section-label" style={{ marginBottom: 12 }}>
+      <div className="mb-5">
+        <div className="section-label mb-3">
           Your Tags ({tags.filter(t => t.trim()).length}/{MAX} — {MIN} required)
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div className="flex flex-col gap-2">
           {tags.map((tag, i) => (
-            <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <div key={i} className="flex gap-2 items-center">
               <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 19,
-                  color: 'var(--amber-dim)',
-                  letterSpacing: 2,
-                  minWidth: 20,
-                  flexShrink: 0,
-                }}
+                className="font-mono text-base text-amber-dim tracking-[2px] min-w-5 flex-shrink-0"
               >
                 #{i + 1}
               </div>
@@ -96,9 +75,8 @@ export default function StepBackgroundTags({ state, onChange }: Props) {
               />
               {tags.length > MIN && (
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger text-2xl px-2.5 py-1.5 flex-shrink-0"
                   onClick={() => removeTag(i)}
-                  style={{ fontSize: 30, padding: '6px 10px', flexShrink: 0 }}
                 >
                   ×
                 </button>
@@ -109,9 +87,8 @@ export default function StepBackgroundTags({ state, onChange }: Props) {
 
         {tags.length < MAX && (
           <button
-            className="btn"
+            className="btn mt-2.5 text-2xl tracking-[2px]"
             onClick={addTag}
-            style={{ marginTop: 10, fontSize: 30, letterSpacing: 2 }}
           >
             + Add Second Tag
           </button>
@@ -120,19 +97,12 @@ export default function StepBackgroundTags({ state, onChange }: Props) {
 
       {/* Examples */}
       <div>
-        <div className="section-label" style={{ marginBottom: 10 }}>Examples</div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        <div className="section-label mb-2.5">Examples</div>
+        <div className="flex flex-wrap gap-1.5">
           {EXAMPLE_TAGS.map((tag) => (
             <div
               key={tag}
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 30,
-                color: 'var(--concrete)',
-                border: '1px solid var(--concrete-dark)',
-                padding: '3px 10px',
-                letterSpacing: 1,
-              }}
+              className="font-mono text-2xl text-concrete border border-concrete-dark px-2.5 py-0.5 tracking-wide"
             >
               {tag}
             </div>

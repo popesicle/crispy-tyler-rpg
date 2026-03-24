@@ -19,19 +19,10 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
       <div className="section-label">Weird Operations</div>
 
       {/* Auras */}
-      <div
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 17,
-          letterSpacing: 3,
-          color: 'var(--amber-dim)',
-          textTransform: 'uppercase',
-          marginBottom: 8,
-        }}
-      >
+      <div className="font-mono text-base tracking-[3px] text-amber-dim uppercase mb-2">
         Auras — Toggle Active
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6, marginBottom: 20 }}>
+      <div className="grid grid-cols-2 gap-1.5 mb-5">
         {AURAS.map((aura) => {
           const active = activeAuras.includes(aura.name)
           return (
@@ -39,55 +30,41 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
               key={aura.name}
               onClick={() => toggleAura(aura.name)}
               style={{
-                padding: '12px',
-                border: `1px solid ${active ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
                 background: active ? 'rgba(200,164,90,0.1)' : 'rgba(255,255,255,0.02)',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all 0.15s',
               }}
+              className="px-3 py-3 border transition-all duration-150 cursor-pointer text-left"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <div className="flex items-center gap-2 mb-1">
                 <div
                   style={{
-                    width: 8,
-                    height: 8,
-                    border: `1px solid ${active ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                    borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
                     background: active ? 'var(--amber-dim)' : 'transparent',
-                    borderRadius: '50%',
-                    flexShrink: 0,
                   }}
+                  className="w-2 h-2 border rounded-full shrink-0"
                 />
                 <div
                   style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 30,
                     color: active ? 'var(--amber)' : 'var(--concrete)',
-                    letterSpacing: 1,
                   }}
+                  className="font-display text-[30px] tracking-[1px]"
                 >
                   {aura.name}
                 </div>
               </div>
               <div
                 style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 17,
                   color: active ? 'var(--concrete-light)' : 'var(--concrete-dark)',
-                  letterSpacing: 1,
-                  lineHeight: 1.5,
-                  marginBottom: 4,
                 }}
+                className="font-mono text-base tracking-[1px] leading-relaxed mb-1"
               >
                 {aura.effect}
               </div>
               <div
                 style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 17,
                   color: active ? 'var(--red-stamp)' : 'var(--concrete-dark)',
-                  letterSpacing: 1,
                 }}
+                className="font-mono text-base tracking-[1px]"
               >
                 Cost: {aura.cost}
               </div>
@@ -97,48 +74,19 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
       </div>
 
       {/* Words of Power — reference only */}
-      <div
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 17,
-          letterSpacing: 3,
-          color: 'var(--concrete)',
-          textTransform: 'uppercase',
-          marginBottom: 8,
-        }}
-      >
+      <div className="font-mono text-base tracking-[3px] text-concrete uppercase mb-2">
         Words of Power — Reference
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 4 }}>
+      <div className="grid grid-cols-2 gap-1">
         {WORDS_OF_POWER.map((word) => (
           <div
             key={word.name}
-            style={{
-              padding: '8px 10px',
-              border: '1px solid var(--concrete-dark)',
-              background: 'rgba(255,255,255,0.01)',
-            }}
+            className="px-2.5 py-2 border border-concrete-dark bg-white/[0.01]"
           >
-            <div
-              style={{
-                fontFamily: '"Special Elite", serif',
-                fontSize: 17,
-                color: 'var(--off-white)',
-                letterSpacing: 1,
-                marginBottom: 3,
-              }}
-            >
+            <div className="font-display text-base text-off-white tracking-[1px] mb-0.75">
               {word.name}
             </div>
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 17,
-                color: 'var(--concrete)',
-                letterSpacing: 1,
-                lineHeight: 1.5,
-              }}
-            >
+            <div className="font-mono text-base text-concrete tracking-[1px] leading-relaxed">
               {word.effect}
             </div>
           </div>

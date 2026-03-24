@@ -73,12 +73,12 @@ export default function StepSkills({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Capability Assessment</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Skills
       </h2>
 
       {/* Status bar */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 24 }}>
+      <div className="flex gap-2 mb-6">
         <StatusPill
           label="Trained"
           count={trainedCount}
@@ -101,19 +101,8 @@ export default function StepSkills({ state, onChange }: Props) {
         )}
       </div>
 
-      <div
-        style={{
-          marginBottom: 20,
-          padding: '8px 12px',
-          border: '1px solid var(--concrete-dark)',
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 30,
-          color: 'var(--concrete)',
-          letterSpacing: 1,
-          lineHeight: 1.6,
-        }}
-      >
-        Pick <strong style={{ color: 'var(--off-white)' }}>3 Trained</strong> + <strong style={{ color: 'var(--amber)' }}>1 Expert</strong>.
+      <div className="mb-5 p-3 border border-concrete-dark font-mono text-2xl text-concrete tracking-wide leading-relaxed">
+        Pick <strong className="text-off-white">3 Trained</strong> + <strong className="text-amber">1 Expert</strong>.
         Only the Expert skill gets specializations — pick at least 1 from its list.
         Trained skills carry no specializations.
       </div>
@@ -123,39 +112,24 @@ export default function StepSkills({ state, onChange }: Props) {
         const open = expandedCat === cat
 
         return (
-          <div key={cat} style={{ marginBottom: 4 }}>
+          <div key={cat} className="mb-1">
             {/* Category header */}
             <button
               onClick={() => setExpandedCat(open ? null : cat)}
               style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '8px 14px',
                 background: open ? 'rgba(200,164,90,0.06)' : 'rgba(255,255,255,0.02)',
-                border: '1px solid var(--concrete-dark)',
                 borderColor: open ? 'var(--amber-deep)' : 'var(--concrete-dark)',
-                cursor: 'pointer',
-                textAlign: 'left',
               }}
+              className="w-full flex items-center justify-between px-3.5 py-2 border text-left"
             >
-              <span
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
-                  letterSpacing: 4,
-                  color: 'var(--amber-dim)',
-                  textTransform: 'uppercase',
-                }}
-              >
+              <span className="font-mono text-2xl tracking-[4px] text-amber-dim uppercase">
                 {cat}
               </span>
-              <span style={{ color: 'var(--concrete)', fontSize: 36 }}>{open ? '▲' : '▼'}</span>
+              <span className="text-concrete text-4xl">{open ? '▲' : '▼'}</span>
             </button>
 
             {open && (
-              <div style={{ borderLeft: '2px solid var(--amber-deep)', marginLeft: 4 }}>
+              <div style={{ borderLeftColor: 'var(--amber-deep)' }} className="border-l-2 ml-1">
                 {catSkills.map((skill) => {
                   const sel = getSkill(skill.name)
                   const isTrained = sel?.level === 'trained'
@@ -165,37 +139,26 @@ export default function StepSkills({ state, onChange }: Props) {
                     <div key={skill.name}>
                       <div
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 10,
-                          padding: '10px 14px',
-                          borderBottom: '1px solid var(--concrete-dark)',
                           background: isExpert
                             ? 'rgba(200,164,90,0.06)'
                             : isTrained
                             ? 'rgba(255,255,255,0.03)'
                             : 'transparent',
                         }}
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 border-b border-concrete-dark"
                       >
                         {/* Skill name + attr */}
-                        <div style={{ flex: 1 }}>
+                        <div className="flex-1">
                           <div
                             style={{
-                              fontFamily: '"Share Tech Mono", monospace',
-                              fontSize: 17,
                               color: isExpert ? 'var(--amber)' : isTrained ? 'var(--off-white)' : 'var(--concrete)',
                             }}
+                            className="font-mono text-sm"
                           >
                             {skill.name}
                           </div>
                           <div
-                            style={{
-                              fontFamily: '"Share Tech Mono", monospace',
-                              fontSize: 17,
-                              color: 'var(--concrete-dark)',
-                              letterSpacing: 2,
-                              marginTop: 2,
-                            }}
+                            className="font-mono text-sm text-concrete-dark tracking-[2px] mt-0.5"
                           >
                             {skill.attr}
                           </div>
@@ -206,12 +169,12 @@ export default function StepSkills({ state, onChange }: Props) {
                           onClick={() => toggleTrained(skill.name)}
                           disabled={!isTrained && (trainedCount >= TRAINED_MAX || isExpert)}
                           style={{
-                            ...toggleBtnStyle,
                             borderColor: isTrained ? 'var(--concrete-light)' : 'var(--concrete-dark)',
                             color: isTrained ? 'var(--off-white)' : 'var(--concrete-dark)',
                             background: isTrained ? 'rgba(181,179,172,0.15)' : 'transparent',
-                            opacity: !isTrained && (trainedCount >= TRAINED_MAX || isExpert) ? 0.35 : 1,
                           }}
+                          className="w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center"
+                          style={{ opacity: !isTrained && (trainedCount >= TRAINED_MAX || isExpert) ? 0.35 : 1 }}
                         >
                           T
                         </button>
@@ -221,12 +184,12 @@ export default function StepSkills({ state, onChange }: Props) {
                           onClick={() => toggleExpert(skill.name)}
                           disabled={!isExpert && (!!expertSkill || isTrained)}
                           style={{
-                            ...toggleBtnStyle,
                             borderColor: isExpert ? 'var(--amber)' : 'var(--concrete-dark)',
                             color: isExpert ? 'var(--amber)' : 'var(--concrete-dark)',
                             background: isExpert ? 'rgba(200,164,90,0.15)' : 'transparent',
-                            opacity: !isExpert && (!!expertSkill || isTrained) ? 0.35 : 1,
                           }}
+                          className="w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center"
+                          style={{ opacity: !isExpert && (!!expertSkill || isTrained) ? 0.35 : 1 }}
                         >
                           E
                         </button>
@@ -234,26 +197,11 @@ export default function StepSkills({ state, onChange }: Props) {
 
                       {/* Specializations (only for expert skill) */}
                       {isExpert && (
-                        <div
-                          style={{
-                            padding: '12px 14px 14px 28px',
-                            background: 'rgba(200,164,90,0.04)',
-                            borderBottom: '1px solid var(--amber-deep)',
-                          }}
-                        >
-                          <div
-                            style={{
-                              fontFamily: '"Share Tech Mono", monospace',
-                              fontSize: 17,
-                              letterSpacing: 3,
-                              color: 'var(--amber-dim)',
-                              textTransform: 'uppercase',
-                              marginBottom: 8,
-                            }}
-                          >
+                        <div className="px-3.5 pb-3.5 pl-7 bg-amber-deep/10 border-b border-amber-deep">
+                          <div className="font-mono text-sm tracking-[3px] text-amber-dim uppercase mb-2">
                             Specializations — pick ≥1
                           </div>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                          <div className="flex flex-wrap gap-1.5">
                             {skill.specs.map((spec) => {
                               const active = sel?.specializations.includes(spec)
                               return (
@@ -261,15 +209,11 @@ export default function StepSkills({ state, onChange }: Props) {
                                   key={spec}
                                   onClick={() => toggleSpec(skill.name, spec)}
                                   style={{
-                                    fontFamily: '"Share Tech Mono", monospace',
-                                    fontSize: 19,
-                                    padding: '4px 10px',
                                     background: active ? 'rgba(200,164,90,0.2)' : 'transparent',
-                                    border: `1px solid ${active ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                                    borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
                                     color: active ? 'var(--amber)' : 'var(--concrete)',
-                                    cursor: 'pointer',
-                                    letterSpacing: 1,
                                   }}
+                                  className="font-mono text-base px-2.5 py-1 border cursor-pointer tracking-wide"
                                 >
                                   {active ? '✓ ' : ''}{spec}
                                 </button>
@@ -294,30 +238,13 @@ function StatusPill({ label, count, max, ok }: { label: string; count: number; m
   return (
     <div
       style={{
-        padding: '5px 12px',
-        border: `1px solid ${ok ? 'var(--olive)' : 'var(--concrete-dark)'}`,
+        borderColor: ok ? 'var(--olive)' : 'var(--concrete-dark)',
         background: ok ? 'rgba(107,122,62,0.1)' : 'transparent',
-        fontFamily: '"Share Tech Mono", monospace',
-        fontSize: 19,
         color: ok ? 'var(--olive)' : 'var(--concrete)',
-        letterSpacing: 1,
-        whiteSpace: 'nowrap',
       }}
+      className="px-3 py-1.25 border font-mono text-base tracking-wide whitespace-nowrap"
     >
       {label}: {count}{max !== null ? `/${max}` : ''}
     </div>
   )
-}
-
-const toggleBtnStyle: React.CSSProperties = {
-  width: 28,
-  height: 28,
-  fontFamily: '"Share Tech Mono", monospace',
-  fontSize: 19,
-  fontWeight: 'bold',
-  letterSpacing: 1,
-  border: '1px solid',
-  cursor: 'pointer',
-  flexShrink: 0,
-  transition: 'all 0.1s',
 }

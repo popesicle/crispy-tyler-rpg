@@ -34,64 +34,42 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-        <div className="section-label" style={{ margin: 0 }}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="section-label m-0">
           {isFatigue ? `Fatigue (CON: ${max})` : `Stress (WIS: ${max})`}
         </div>
         {badge && (
           <div
-            style={{
-              fontFamily: '"Special Elite", serif',
-              fontSize: 14,
-              letterSpacing: 3,
-              color: badge.color,
-              border: `1px solid ${badge.color}`,
-              padding: '2px 8px',
-              textTransform: 'uppercase',
-            }}
+            style={{ borderColor: badge.color, color: badge.color }}
+            className="font-display text-sm tracking-[3px] border px-2 py-0.5 uppercase"
           >
             {badge.label}
           </div>
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
+      <div className="flex gap-1 flex-wrap items-center">
         {Array.from({ length: displayMax }, (_, i) => {
           const isOverflow = isFatigue && i >= max
           const filled = i < value
+          const borderColor = isOverflow
+            ? '#b02020'
+            : filled
+            ? isFatigue
+              ? 'var(--amber)'
+              : '#b02020'
+            : 'var(--concrete-dark)'
           return (
             <button
               key={i}
               onClick={() => handlePip(i)}
               title={isOverflow ? 'DOWN — exceeded track' : undefined}
               style={{
-                width: 22,
-                height: 22,
-                border: `1px solid ${
-                  isOverflow
-                    ? '#b02020'
-                    : filled
-                    ? isFatigue
-                      ? 'var(--amber)'
-                      : '#b02020'
-                    : 'var(--concrete-dark)'
-                }`,
-                background: filled
-                  ? isOverflow
-                    ? overflowColor
-                    : fillColor
-                  : 'transparent',
-                cursor: 'pointer',
-                padding: 0,
-                transition: 'background 0.1s, border-color 0.1s',
-                // overflow pip gets an X marker
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 14,
+                borderColor,
+                background: filled ? (isOverflow ? overflowColor : fillColor) : 'transparent',
                 color: filled ? 'transparent' : 'var(--concrete-dark)',
               }}
+              className="w-[22px] h-[22px] border p-0 transition-all duration-100 flex items-center justify-center font-mono text-sm cursor-pointer"
             >
               {isOverflow && !filled ? '×' : ''}
             </button>
@@ -101,33 +79,14 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
         {/* Reset button */}
         <button
           onClick={() => onChange(0)}
-          style={{
-            marginLeft: 6,
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 12,
-            letterSpacing: 2,
-            color: 'var(--concrete-dark)',
-            background: 'transparent',
-            border: '1px solid var(--concrete-dark)',
-            padding: '2px 6px',
-            cursor: 'pointer',
-            textTransform: 'uppercase',
-          }}
+          className="ml-1.5 font-mono text-xs tracking-[2px] text-concrete-dark bg-transparent border border-concrete-dark px-1.5 py-0.5 cursor-pointer uppercase"
         >
           Reset
         </button>
       </div>
 
       {isFatigue && (
-        <div
-          style={{
-            marginTop: 6,
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 12,
-            color: 'var(--concrete-dark)',
-            letterSpacing: 1,
-          }}
-        >
+        <div className="mt-1.5 font-mono text-xs text-concrete-dark tracking-[1px]">
           At {max}: <span style={{ color: 'var(--red-stamp)' }}>WOUNDED</span> (−1 die physical) &nbsp;|&nbsp; Overflow:{' '}
           <span style={{ color: '#b02020' }}>DOWN</span>
         </div>

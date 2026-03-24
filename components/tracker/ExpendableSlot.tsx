@@ -14,7 +14,7 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Expendables</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div className="flex flex-col gap-1">
         {expendables.map((item) => {
           const detail = EXPENDABLES.find((e) => e.name === item.name)
           return (
@@ -22,54 +22,33 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
               key={item.name}
               onClick={() => toggle(item.name)}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '10px 14px',
-                border: `1px solid ${item.used ? 'var(--concrete-dark)' : 'var(--amber-dim)'}`,
+                borderColor: item.used ? 'var(--concrete-dark)' : 'var(--amber-dim)',
                 background: item.used ? 'rgba(255,255,255,0.01)' : 'rgba(200,164,90,0.05)',
-                cursor: 'pointer',
-                textAlign: 'left',
-                width: '100%',
                 opacity: item.used ? 0.55 : 1,
-                transition: 'all 0.15s',
-                position: 'relative',
               }}
+              className="flex items-center gap-3 px-3.5 py-2.5 border transition-all duration-150 cursor-pointer text-left w-full relative"
             >
               {/* Status indicator */}
               <div
                 style={{
-                  width: 10,
-                  height: 10,
-                  border: `1px solid ${item.used ? 'var(--concrete-dark)' : 'var(--amber)'}`,
+                  borderColor: item.used ? 'var(--concrete-dark)' : 'var(--amber)',
                   background: item.used ? 'transparent' : 'var(--amber-dim)',
-                  flexShrink: 0,
                 }}
+                className="w-2.5 h-2.5 border shrink-0 rounded-full"
               />
 
               {/* Name + category */}
-              <div style={{ flex: 1 }}>
+              <div className="flex-1">
                 <div
                   style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 19,
                     color: item.used ? 'var(--concrete)' : 'var(--off-white)',
-                    letterSpacing: 1,
-                    textDecoration: item.used ? 'line-through' : 'none',
                   }}
+                  className={`font-display text-lg tracking-[1px] ${item.used ? 'line-through' : ''}`}
                 >
                   {item.name}
                 </div>
                 {detail && (
-                  <div
-                    style={{
-                      fontFamily: '"Share Tech Mono", monospace',
-                      fontSize: 17,
-                      color: 'var(--concrete-dark)',
-                      letterSpacing: 2,
-                      marginTop: 2,
-                    }}
-                  >
+                  <div className="font-mono text-base text-concrete-dark tracking-[2px] mt-0.5">
                     {detail.cat}
                   </div>
                 )}
@@ -78,17 +57,7 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
               {/* Depleted stamp */}
               {item.used && (
                 <div
-                  className="stamp stamp-rotated"
-                  style={{
-                    fontSize: 17,
-                    letterSpacing: 3,
-                    padding: '1px 6px',
-                    opacity: 0.7,
-                    position: 'absolute',
-                    right: 14,
-                    top: '50%',
-                    transform: 'translateY(-50%) rotate(-4deg)',
-                  }}
+                  className="stamp stamp-rotated text-base tracking-[3px] px-1.5 py-0.5 opacity-70 absolute right-3.5 top-1/2 -translate-y-1/2 -rotate-1"
                 >
                   Depleted
                 </div>
@@ -97,15 +66,7 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
           )
         })}
       </div>
-      <div
-        style={{
-          marginTop: 6,
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 17,
-          color: 'var(--concrete-dark)',
-          letterSpacing: 1,
-        }}
-      >
+      <div className="mt-1.5 font-mono text-base text-concrete-dark tracking-[1px]">
         Click to toggle depleted state.
       </div>
     </div>

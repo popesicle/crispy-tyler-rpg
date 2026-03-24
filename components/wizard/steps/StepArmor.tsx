@@ -10,25 +10,16 @@ export default function StepArmor({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Field Equipment</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Armor Class
       </h2>
 
-      <p
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 19,
-          color: 'var(--concrete)',
-          letterSpacing: 1,
-          marginBottom: 28,
-          lineHeight: 1.6,
-        }}
-      >
+      <p className="font-mono text-base text-concrete tracking-wide mb-7 leading-relaxed">
         Select your operative&apos;s standard protective equipment. Soak dice reduce incoming physical
         damage. Initiative modifier applies to action order.
       </p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className="flex flex-col gap-2">
         {ARMOR_OPTIONS.map((armor) => {
           const selected = state.armor === armor.type
 
@@ -37,38 +28,24 @@ export default function StepArmor({ state, onChange }: Props) {
               key={armor.type}
               onClick={() => onChange({ armor: armor.type as ArmorType })}
               style={{
-                width: '100%',
-                display: 'grid',
-                gridTemplateColumns: '80px 1fr auto',
-                alignItems: 'center',
-                gap: 16,
-                padding: '18px 20px',
-                border: `1px solid ${selected ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
                 background: selected ? 'rgba(200,164,90,0.08)' : 'rgba(255,255,255,0.02)',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all 0.15s',
+                gridTemplateColumns: '80px 1fr auto',
               }}
+              className="w-full grid gap-4 px-5 py-[18px] border transition-all duration-150 items-center text-left"
             >
               {/* Selected indicator + label */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="flex items-center gap-2.5">
                 <div
                   style={{
                     width: 14,
                     height: 14,
-                    border: `1px solid ${selected ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                    borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
                     background: selected ? 'var(--amber-dim)' : 'transparent',
-                    flexShrink: 0,
                   }}
+                  className="border flex-shrink-0"
                 />
-                <div
-                  style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 30,
-                    color: selected ? 'var(--amber)' : 'var(--off-white)',
-                    letterSpacing: 1,
-                  }}
-                >
+                <div className="font-display text-2xl tracking-wide" style={{ color: selected ? 'var(--amber)' : 'var(--off-white)' }}>
                   {armor.label}
                 </div>
               </div>
@@ -76,12 +53,9 @@ export default function StepArmor({ state, onChange }: Props) {
               {/* Description */}
               <div>
                 <div
+                  className="font-mono text-base tracking-wide mb-0.5"
                   style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 19,
                     color: selected ? 'var(--off-white)' : 'var(--concrete)',
-                    letterSpacing: 1,
-                    marginBottom: 3,
                   }}
                 >
                   {armor.description}
@@ -89,24 +63,19 @@ export default function StepArmor({ state, onChange }: Props) {
               </div>
 
               {/* Stats */}
-              <div style={{ textAlign: 'right', flexShrink: 0 }}>
+              <div className="text-right flex-shrink-0">
                 <div
+                  className="font-mono text-sm tracking-wide"
                   style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 17,
                     color: selected ? 'var(--amber)' : 'var(--concrete-light)',
-                    letterSpacing: 1,
                   }}
                 >
                   {armor.soak}
                 </div>
                 <div
+                  className="font-mono text-2xl tracking-wide mt-0.5"
                   style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 30,
                     color: selected ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                    letterSpacing: 1,
-                    marginTop: 2,
                   }}
                 >
                   {armor.modifier}

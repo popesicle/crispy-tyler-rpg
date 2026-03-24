@@ -47,13 +47,12 @@ export default function ClockWidget({ clocks, onChange }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <div className="section-label" style={{ margin: 0 }}>Clocks</div>
+      <div className="flex items-center justify-between mb-3">
+        <div className="section-label m-0">Clocks</div>
         {!adding && (
           <button
-            className="btn"
+            className="btn text-xs tracking-[2px] px-[10px] py-0.75"
             onClick={() => setAdding(true)}
-            style={{ fontSize: 13, letterSpacing: 2, padding: '3px 10px' }}
           >
             + Add Clock
           </button>
@@ -62,15 +61,8 @@ export default function ClockWidget({ clocks, onChange }: Props) {
 
       {/* Add clock form */}
       {adding && (
-        <div
-          style={{
-            padding: '14px',
-            border: '1px solid var(--amber-deep)',
-            background: 'rgba(61,46,15,0.2)',
-            marginBottom: 12,
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="px-3.5 py-3.5 border border-amber-deep bg-[rgba(61,46,15,0.2)] mb-3">
+          <div className="flex flex-col gap-2.5">
             <input
               className="input"
               type="text"
@@ -81,44 +73,35 @@ export default function ClockWidget({ clocks, onChange }: Props) {
               onKeyDown={(e) => e.key === 'Enter' && addClock()}
             />
 
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', gap: 4 }}>
+            <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-1">
                 {(['progress', 'threat'] as const).map((t) => (
                   <button
                     key={t}
                     onClick={() => setNewType(t)}
-                    style={{
-                      fontFamily: '"Share Tech Mono", monospace',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                      padding: '4px 10px',
-                      border: `1px solid ${newType === t ? (t === 'progress' ? 'var(--olive)' : 'var(--red-stamp)') : 'var(--concrete-dark)'}`,
-                      background: newType === t ? (t === 'progress' ? 'rgba(107,122,62,0.15)' : 'rgba(139,26,26,0.15)') : 'transparent',
-                      color: newType === t ? (t === 'progress' ? 'var(--olive)' : 'var(--red-stamp)') : 'var(--concrete)',
-                      cursor: 'pointer',
-                      textTransform: 'uppercase',
-                    }}
+                    className={`font-mono text-sm tracking-[2px] px-[10px] py-1 uppercase cursor-pointer ${
+                      newType === t
+                        ? t === 'progress'
+                          ? 'border border-olive bg-[rgba(107,122,62,0.15)] text-olive'
+                          : 'border border-red-stamp bg-[rgba(139,26,26,0.15)] text-red-stamp'
+                        : 'border border-concrete-dark bg-transparent text-concrete'
+                    }`}
                   >
                     {t}
                   </button>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: 4 }}>
+              <div className="flex gap-1">
                 {([4, 6, 8] as const).map((n) => (
                   <button
                     key={n}
                     onClick={() => setNewSegments(n)}
-                    style={{
-                      fontFamily: '"Share Tech Mono", monospace',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                      padding: '4px 10px',
-                      border: `1px solid ${newSegments === n ? 'var(--amber-dim)' : 'var(--concrete-dark)'}`,
-                      background: newSegments === n ? 'rgba(200,164,90,0.12)' : 'transparent',
-                      color: newSegments === n ? 'var(--amber)' : 'var(--concrete)',
-                      cursor: 'pointer',
-                    }}
+                    className={`font-mono text-sm tracking-[2px] px-[10px] py-1 cursor-pointer ${
+                      newSegments === n
+                        ? 'border border-amber-dim bg-[rgba(200,164,90,0.12)] text-amber'
+                        : 'border border-concrete-dark bg-transparent text-concrete'
+                    }`}
                   >
                     {n}
                   </button>
@@ -126,11 +109,11 @@ export default function ClockWidget({ clocks, onChange }: Props) {
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 8 }}>
-              <button className="btn btn-primary" onClick={addClock} style={{ fontSize: 14, letterSpacing: 2, padding: '5px 14px' }}>
+            <div className="flex gap-2">
+              <button className="btn btn-primary text-sm tracking-[2px] px-3.5 py-1.25" onClick={addClock}>
                 Add
               </button>
-              <button className="btn" onClick={() => { setAdding(false); setNewName('') }} style={{ fontSize: 14, letterSpacing: 2, padding: '5px 14px' }}>
+              <button className="btn text-sm tracking-[2px] px-3.5 py-1.25" onClick={() => { setAdding(false); setNewName('') }}>
                 Cancel
               </button>
             </div>
@@ -140,22 +123,12 @@ export default function ClockWidget({ clocks, onChange }: Props) {
 
       {/* Clock list */}
       {clocks.length === 0 && !adding && (
-        <div
-          style={{
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 30,
-            color: 'var(--concrete-dark)',
-            letterSpacing: 2,
-            textAlign: 'center',
-            padding: '16px 0',
-            border: '1px solid var(--concrete-dark)',
-          }}
-        >
+        <div className="font-mono text-[30px] text-concrete-dark tracking-[2px] text-center py-4 border border-concrete-dark">
           No active clocks.
         </div>
       )}
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+      <div className="flex flex-wrap gap-4">
         {clocks.map((clock) => (
           <ClockCard
             key={clock.id}
@@ -204,25 +177,16 @@ function ClockCard({
   return (
     <div
       style={{
-        border: `1px solid ${isProgress ? 'var(--olive-dim)' : 'var(--red-stamp)'}`,
-        background: 'rgba(255,255,255,0.02)',
-        padding: '12px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 6,
-        minWidth: 120,
+        borderColor: isProgress ? 'var(--olive-dim)' : 'var(--red-stamp)',
       }}
+      className={`border bg-white/[0.02] px-3 py-3 flex flex-col items-center gap-1.5 min-w-[120px]`}
     >
       {/* Type badge */}
       <div
         style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 36,
-          letterSpacing: 3,
           color: isProgress ? 'var(--olive)' : 'var(--red-stamp)',
-          textTransform: 'uppercase',
         }}
+        className="font-mono text-[36px] tracking-[3px] uppercase"
       >
         {clock.type}
       </div>
@@ -232,7 +196,7 @@ function ClockCard({
         width={SIZE}
         height={SIZE}
         viewBox={`0 0 ${SIZE} ${SIZE}`}
-        style={{ cursor: 'pointer' }}
+        className="cursor-pointer"
       >
         {Array.from({ length: clock.segments }, (_, i) => (
           <path
@@ -249,35 +213,19 @@ function ClockCard({
       </svg>
 
       {/* Filled count */}
-      <div
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 30,
-          color: 'var(--concrete)',
-          letterSpacing: 1,
-        }}
-      >
+      <div className="font-mono text-[30px] text-concrete tracking-[1px]">
         {clock.filled}/{clock.segments}
       </div>
 
       {/* Name */}
-      <div
-        style={{
-          fontFamily: '"Special Elite", serif',
-          fontSize: 36,
-          color: 'var(--off-white)',
-          textAlign: 'center',
-          letterSpacing: 1,
-        }}
-      >
+      <div className="font-display text-[36px] text-off-white text-center tracking-[1px]">
         {clock.name}
       </div>
 
       {/* Delete */}
       <button
         onClick={onDelete}
-        className="btn btn-danger"
-        style={{ fontSize: 36, padding: '2px 8px', letterSpacing: 2 }}
+        className="btn btn-danger text-[36px] px-2 py-0.5 tracking-[2px]"
       >
         Remove
       </button>

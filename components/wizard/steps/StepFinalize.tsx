@@ -21,71 +21,40 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
     <div>
       {/* Classified header */}
       <div
-        style={{
-          background: 'var(--red-stamp)',
-          color: 'var(--off-white)',
-          fontFamily: '"Special Elite", serif',
-          fontSize: 17,
-          letterSpacing: 6,
-          textTransform: 'uppercase',
-          textAlign: 'center',
-          padding: '6px 0',
-          marginBottom: 20,
-          opacity: 0.9,
-        }}
+        className="bg-red-stamp text-off-white font-display text-sm tracking-[6px] uppercase text-center px-0 py-1.5 mb-5 opacity-90"
       >
         Federal Remediation Commission — Personnel File
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, marginBottom: 24 }}>
+      <div className="flex items-baseline gap-4 mb-6">
         <h2
-          style={{
-            fontFamily: '"Special Elite", serif',
-            fontSize: 36,
-            color: 'var(--amber)',
-            margin: 0,
-            letterSpacing: 2,
-          }}
+          className="font-display text-4xl text-amber m-0 tracking-[2px]"
         >
           {state.name || '—'}
         </h2>
         {state.codename && (
           <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 17,
-              color: 'var(--amber-dim)',
-              letterSpacing: 2,
-            }}
+            className="font-mono text-sm text-amber-dim tracking-[2px]"
           >
             &ldquo;{state.codename}&rdquo;
           </div>
         )}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div className="grid grid-cols-2 gap-4">
         {/* Attributes */}
         <Section label="Attributes">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}>
+          <div className="grid grid-cols-3 gap-1">
             {ATTR_KEYS.map((k) => (
               <div
                 key={k}
-                style={{
-                  textAlign: 'center',
-                  padding: '6px 4px',
-                  border: '1px solid var(--concrete-dark)',
-                }}
+                className="text-center p-1.5 border border-concrete-dark"
               >
-                <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--amber)' }}>
+                <div className="font-display text-2xl text-amber">
                   {state.attrs[k]}
                 </div>
                 <div
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 36,
-                    color: 'var(--concrete)',
-                    letterSpacing: 2,
-                  }}
+                  className="font-mono text-4xl text-concrete tracking-[2px]"
                 >
                   {k}
                 </div>
@@ -96,15 +65,15 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
 
         {/* Proficiency dice */}
         <Section label="Proficiency Dice">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ display: 'flex', gap: 5 }}>
+          <div className="flex items-center gap-2.5">
+            <div className="flex gap-1.25">
               <FinalizeDie /><FinalizeDie />
             </div>
             <div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 36, color: 'var(--amber)', letterSpacing: 2 }}>
+              <div className="font-mono text-4xl text-amber tracking-[2px]">
                 2d6
               </div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--concrete)', letterSpacing: 1, marginTop: 1 }}>
+              <div className="font-mono text-sm text-concrete tracking-wide mt-0.25">
                 Added to every roll
               </div>
             </div>
@@ -114,22 +83,14 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
         {/* Armor + weapons */}
         <Section label="Loadout">
           <Row label="Armor" value={state.armor.toUpperCase()} />
-          <div style={{ marginTop: 8 }}>
+          <div className="mt-2">
             {state.weapons.map((w, i) => (
               <div
                 key={i}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 19,
-                  color: 'var(--concrete-light)',
-                  padding: '3px 0',
-                  borderBottom: '1px solid var(--concrete-dark)',
-                }}
+                className="flex justify-between font-mono text-base text-concrete-light py-0.5 px-0 border-b border-concrete-dark"
               >
                 <span>{w.name}</span>
-                <span style={{ color: 'var(--amber-dim)' }}>{w.damage}</span>
+                <span className="text-amber-dim">{w.damage}</span>
               </div>
             ))}
           </div>
@@ -138,29 +99,17 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
         {/* Skills */}
         <Section label="Skills">
           {expertSkill && (
-            <div style={{ marginBottom: 8 }}>
+            <div className="mb-2">
               <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 17,
-                  color: 'var(--amber-dim)',
-                  letterSpacing: 3,
-                  textTransform: 'uppercase',
-                  marginBottom: 4,
-                }}
+                className="font-mono text-sm text-amber-dim tracking-[3px] uppercase mb-1"
               >
                 Expert
               </div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 36, color: 'var(--amber)' }}>
+              <div className="font-mono text-4xl text-amber">
                 {expertSkill.name}
               </div>
               <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
-                  color: 'var(--concrete)',
-                  marginTop: 2,
-                }}
+                className="font-mono text-2xl text-concrete mt-0.5"
               >
                 {expertSkill.specializations.join(', ')}
               </div>
@@ -168,26 +117,14 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
           )}
           <div>
             <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 17,
-                color: 'var(--concrete)',
-                letterSpacing: 3,
-                textTransform: 'uppercase',
-                marginBottom: 4,
-              }}
+              className="font-mono text-sm text-concrete tracking-[3px] uppercase mb-1"
             >
               Trained
             </div>
             {trainedSkills.map((s) => (
               <div
                 key={s.name}
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 19,
-                  color: 'var(--concrete-light)',
-                  padding: '2px 0',
-                }}
+                className="font-mono text-base text-concrete-light py-0.5 px-0"
               >
                 {s.name}
               </div>
@@ -197,17 +134,11 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
 
         {/* Talent */}
         <Section label="Talent">
-          <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--off-white)', marginBottom: 6 }}>
+          <div className="font-display text-2xl text-off-white mb-1.5">
             {state.talent}
           </div>
           <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 30,
-              color: 'var(--concrete)',
-              letterSpacing: 1,
-              lineHeight: 1.6,
-            }}
+            className="font-mono text-2xl text-concrete tracking-wide leading-relaxed"
           >
             {state.talentDesc}
           </div>
@@ -215,30 +146,19 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
       </div>
 
       {/* Expendables */}
-      <div style={{ marginTop: 16 }}>
+      <div className="mt-4">
         <Section label="Expendables">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div className="flex flex-col gap-1">
             {expendableDetails.filter(Boolean).map((item) => (
               <div
                 key={item.name}
-                style={{
-                  padding: '8px 12px',
-                  border: '1px solid var(--concrete-dark)',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
+                className="p-2 border border-concrete-dark flex justify-between items-center"
               >
-                <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--off-white)' }}>
+                <div className="font-display text-2xl text-off-white">
                   {item.name}
                 </div>
                 <div
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 17,
-                    color: 'var(--concrete)',
-                    letterSpacing: 2,
-                  }}
+                  className="font-mono text-sm text-concrete tracking-[2px]"
                 >
                   {item.cat}
                 </div>
@@ -249,20 +169,13 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
       </div>
 
       {/* Background tags */}
-      <div style={{ marginTop: 16 }}>
+      <div className="mt-4">
         <Section label="Background Tags">
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="flex gap-2 flex-wrap">
             {state.bgTags.filter((t) => t.trim()).map((tag) => (
               <div
                 key={tag}
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 19,
-                  color: 'var(--amber)',
-                  border: '1px solid var(--amber-deep)',
-                  padding: '4px 12px',
-                  letterSpacing: 1,
-                }}
+                className="font-mono text-base text-amber border border-amber-deep px-3 py-1 tracking-wide"
               >
                 {tag}
               </div>
@@ -273,17 +186,10 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
 
       {/* Backstory */}
       {state.backstory && (
-        <div style={{ marginTop: 16 }}>
+        <div className="mt-4">
           <Section label="Personnel Notes">
             <p
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 19,
-                color: 'var(--concrete)',
-                letterSpacing: 1,
-                lineHeight: 1.6,
-                margin: 0,
-              }}
+              className="font-mono text-base text-concrete tracking-wide leading-relaxed m-0"
             >
               {state.backstory}
             </p>
@@ -294,39 +200,23 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
       {/* Error */}
       {error && (
         <div
-          style={{
-            marginTop: 20,
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 19,
-            color: 'var(--red-stamp)',
-            border: '1px solid var(--red-stamp)',
-            padding: '10px 14px',
-            letterSpacing: 1,
-          }}
+          className="mt-5 font-mono text-base text-red-stamp border border-red-stamp p-3 tracking-wide"
         >
           {error}
         </div>
       )}
 
       {/* Submit */}
-      <div style={{ marginTop: 28, textAlign: 'center' }}>
+      <div className="mt-7 text-center">
         <button
           onClick={onSubmit}
           disabled={submitting}
-          className="btn btn-primary"
-          style={{ fontSize: 30, padding: '12px 36px', letterSpacing: 5 }}
+          className="btn btn-primary text-2xl px-9 py-3 tracking-[5px]"
         >
           {submitting ? 'Filing...' : 'File Character'}
         </button>
         <div
-          style={{
-            marginTop: 10,
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 17,
-            color: 'var(--concrete-dark)',
-            letterSpacing: 2,
-            textTransform: 'uppercase',
-          }}
+          className="mt-2.5 font-mono text-sm text-concrete-dark tracking-[2px] uppercase"
         >
           FRC Form 7-OP — Operative Character Record
         </div>
@@ -337,8 +227,8 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div style={{ border: '1px solid var(--concrete-dark)', padding: '14px' }}>
-      <div className="section-label" style={{ marginBottom: 10 }}>{label}</div>
+    <div className="border border-concrete-dark p-3.5">
+      <div className="section-label mb-2.5">{label}</div>
       {children}
     </div>
   )
@@ -360,11 +250,11 @@ function FinalizeDie() {
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-      <span style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 30, color: 'var(--concrete)', letterSpacing: 2 }}>
+    <div className="flex justify-between mb-1">
+      <span className="font-mono text-2xl text-concrete tracking-[2px]">
         {label.toUpperCase()}
       </span>
-      <span style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 19, color: 'var(--off-white)', letterSpacing: 1 }}>
+      <span className="font-mono text-base text-off-white tracking-wide">
         {value}
       </span>
     </div>

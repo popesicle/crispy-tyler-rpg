@@ -28,69 +28,35 @@ export default function StepWeapons({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Assigned Loadout</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Weapons
       </h2>
 
-      <p
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 19,
-          color: 'var(--concrete)',
-          letterSpacing: 1,
-          marginBottom: 28,
-          lineHeight: 1.6,
-        }}
-      >
+      <p className="font-mono text-base text-concrete tracking-wide mb-7 leading-relaxed">
         All operatives carry a standard-issue sidearm. Optionally add one primary weapon from
         your prior service or field experience.
       </p>
 
       {/* Standard issue pistol — locked */}
-      <div style={{ marginBottom: 20 }}>
-        <div className="section-label" style={{ marginBottom: 10 }}>Standard Issue (cannot remove)</div>
+      <div className="mb-5">
+        <div className="section-label mb-2.5">Standard Issue (cannot remove)</div>
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '14px 18px',
-            border: '1px solid var(--olive-dim)',
-            background: 'rgba(107,122,62,0.05)',
-          }}
+          className="flex items-center justify-between px-[18px] py-3.5 border border-olive-dim bg-olive-dim/10"
         >
           <div>
             <div
-              style={{
-                fontFamily: '"Special Elite", serif',
-                fontSize: 36,
-                color: 'var(--off-white)',
-                letterSpacing: 1,
-              }}
+              className="font-display text-4xl text-off-white tracking-wide"
             >
               {PISTOL.name}
             </div>
             <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 17,
-                color: 'var(--concrete)',
-                letterSpacing: 2,
-                marginTop: 2,
-              }}
+              className="font-mono text-sm text-concrete tracking-[2px] mt-0.5"
             >
               Standard FRC field sidearm
             </div>
           </div>
           <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 36,
-              color: 'var(--olive)',
-              letterSpacing: 2,
-              border: '1px solid var(--olive-dim)',
-              padding: '3px 10px',
-            }}
+            className="font-mono text-4xl text-olive tracking-[2px] border border-olive-dim px-2.5 py-0.5"
           >
             {PISTOL.damage}
           </div>
@@ -99,21 +65,14 @@ export default function StepWeapons({ state, onChange }: Props) {
 
       {/* Primary weapon */}
       <div>
-        <div className="section-label" style={{ marginBottom: 10 }}>
-          Primary Weapon <span style={{ color: 'var(--concrete)', fontSize: 17 }}>(optional)</span>
+        <div className="section-label mb-2.5">
+          Primary Weapon <span className="text-concrete text-sm">(optional)</span>
         </div>
         <div
-          style={{
-            padding: '18px',
-            border: '1px solid var(--concrete-dark)',
-            background: 'rgba(255,255,255,0.02)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 14,
-          }}
+          className="p-[18px] border border-concrete-dark bg-white/[0.02] flex flex-col gap-3.5"
         >
           <div>
-            <label style={labelStyle}>Weapon Name</label>
+            <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Weapon Name</label>
             <input
               className="input"
               type="text"
@@ -124,8 +83,8 @@ export default function StepWeapons({ state, onChange }: Props) {
           </div>
 
           <div>
-            <label style={labelStyle}>Damage</label>
-            <div style={{ display: 'flex', gap: 6 }}>
+            <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Damage</label>
+            <div className="flex gap-1.5">
               {DAMAGE_OPTIONS.map((opt) => {
                 const sel = (primary?.damage ?? '2 Fatigue') === opt
                 return (
@@ -133,15 +92,11 @@ export default function StepWeapons({ state, onChange }: Props) {
                     key={opt}
                     onClick={() => updatePrimary({ damage: opt })}
                     style={{
-                      fontFamily: '"Share Tech Mono", monospace',
-                      fontSize: 36,
-                      padding: '6px 14px',
-                      border: `1px solid ${sel ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                      borderColor: sel ? 'var(--amber)' : 'var(--concrete-dark)',
                       background: sel ? 'rgba(200,164,90,0.12)' : 'transparent',
                       color: sel ? 'var(--amber)' : 'var(--concrete)',
-                      cursor: 'pointer',
-                      letterSpacing: 1,
                     }}
+                    className="font-mono text-4xl px-3.5 py-1.5 border cursor-pointer tracking-wide"
                   >
                     {opt}
                   </button>
@@ -154,23 +109,16 @@ export default function StepWeapons({ state, onChange }: Props) {
 
       {/* Summary */}
       {state.weapons.length > 0 && (
-        <div style={{ marginTop: 20 }}>
-          <div className="section-label" style={{ marginBottom: 8 }}>Loadout Summary</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div className="mt-5">
+          <div className="section-label mb-2">Loadout Summary</div>
+          <div className="flex flex-col gap-0.5">
             {state.weapons.map((w, i) => (
               <div
                 key={i}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  padding: '8px 14px',
-                  border: '1px solid var(--concrete-dark)',
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 36,
-                }}
+                className="flex justify-between px-3.5 py-2 border border-concrete-dark font-mono text-4xl"
               >
-                <span style={{ color: 'var(--off-white)' }}>{w.name}</span>
-                <span style={{ color: 'var(--amber-dim)' }}>{w.damage}</span>
+                <span className="text-off-white">{w.name}</span>
+                <span className="text-amber-dim">{w.damage}</span>
               </div>
             ))}
           </div>
@@ -178,14 +126,4 @@ export default function StepWeapons({ state, onChange }: Props) {
       )}
     </div>
   )
-}
-
-const labelStyle: React.CSSProperties = {
-  display: 'block',
-  fontFamily: '"Share Tech Mono", monospace',
-  fontSize: 30,
-  letterSpacing: 3,
-  color: 'var(--amber-dim)',
-  textTransform: 'uppercase',
-  marginBottom: 6,
 }

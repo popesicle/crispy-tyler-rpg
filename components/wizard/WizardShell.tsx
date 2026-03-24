@@ -111,26 +111,17 @@ export default function WizardShell() {
   const ok = canProceed()
 
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto' }}>
+    <div className="max-w-[960px] mx-auto">
       {/* Page header */}
-      <div style={{ marginBottom: 24 }}>
+      <div className="mb-6">
         <div className="section-label">Character Creation</div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h1
-            style={{
-              fontFamily: '"Special Elite", serif',
-              fontSize: 30,
-              color: 'var(--amber)',
-              margin: 0,
-              letterSpacing: 2,
-            }}
-          >
+        <div className="flex items-center justify-between">
+          <h1 className="font-display text-[30px] text-amber m-0 tracking-[2px]">
             New Operative File
           </h1>
           <button
-            className="btn"
+            className="btn text-[30px] tracking-[2px] px-3 py-1.25"
             onClick={() => setSidebarOpen((o) => !o)}
-            style={{ fontSize: 30, letterSpacing: 2, padding: '5px 12px' }}
           >
             {sidebarOpen ? 'Hide' : 'Show'} Reference Builds
           </button>
@@ -138,16 +129,7 @@ export default function WizardShell() {
       </div>
 
       {/* Step indicator */}
-      <div
-        style={{
-          display: 'flex',
-          gap: 0,
-          marginBottom: 28,
-          overflowX: 'auto',
-          borderBottom: '1px solid var(--concrete-dark)',
-          paddingBottom: 0,
-        }}
-      >
+      <div className="flex gap-0 mb-7 overflow-x-auto border-b border-concrete-dark pb-0">
         {STEPS.map((s, i) => {
           const active = i === step
           const done = i < step
@@ -157,43 +139,26 @@ export default function WizardShell() {
               onClick={() => i < step && setStep(i)}
               disabled={i > step}
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 3,
-                padding: '8px 12px',
-                background: 'transparent',
-                border: 'none',
-                borderBottom: active ? '2px solid var(--amber)' : '2px solid transparent',
+                borderBottomColor: active ? 'var(--amber)' : 'transparent',
                 cursor: i < step ? 'pointer' : 'default',
-                flexShrink: 0,
-                marginBottom: -1,
               }}
+              className="flex flex-col items-center gap-0.75 px-3 py-2 bg-transparent border-b-2 shrink-0 -mb-0.25"
             >
               <div
                 style={{
-                  width: 22,
-                  height: 22,
-                  border: `1px solid ${active ? 'var(--amber)' : done ? 'var(--olive)' : 'var(--concrete-dark)'}`,
+                  borderColor: active ? 'var(--amber)' : done ? 'var(--olive)' : 'var(--concrete-dark)',
                   background: active ? 'var(--amber-deep)' : done ? 'rgba(107,122,62,0.2)' : 'transparent',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
                   color: active ? 'var(--amber)' : done ? 'var(--olive)' : 'var(--concrete-dark)',
                 }}
+                className="w-[22px] h-[22px] border flex items-center justify-center font-mono text-[30px]"
               >
                 {done ? '✓' : i + 1}
               </div>
               <div
                 style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 36,
-                  letterSpacing: 2,
-                  textTransform: 'uppercase',
                   color: active ? 'var(--amber)' : done ? 'var(--concrete)' : 'var(--concrete-dark)',
                 }}
+                className="font-mono text-[36px] tracking-[2px] uppercase"
               >
                 {s.label}
               </div>
@@ -203,10 +168,10 @@ export default function WizardShell() {
       </div>
 
       {/* Main layout */}
-      <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+      <div className="flex gap-5 items-start">
         {/* Step content */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div className="panel" style={{ marginBottom: 20 }}>
+        <div className="flex-1 min-w-0">
+          <div className="panel mb-5">
             {step === 0 && <StepIdentity state={state} onChange={update} />}
             {step === 1 && <StepAttributes state={state} onChange={update} />}
             {step === 2 && <StepSkills state={state} onChange={update} />}
@@ -228,32 +193,28 @@ export default function WizardShell() {
 
           {/* Navigation */}
           {step < STEPS.length - 1 && (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="flex justify-between items-center">
               <button
-                className="btn"
+                className="btn text-base tracking-[3px]"
                 onClick={() => setStep((s) => s - 1)}
                 disabled={step === 0}
-                style={{ fontSize: 19, letterSpacing: 3 }}
               >
                 ← Back
               </button>
 
               <div
                 style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
                   color: ok ? 'var(--olive)' : 'var(--red-stamp)',
-                  letterSpacing: 2,
                 }}
+                className="font-mono text-[30px] tracking-[2px]"
               >
                 {ok ? '— ready —' : validationMessage(step)}
               </div>
 
               <button
-                className="btn btn-primary"
+                className="btn btn-primary text-base tracking-[3px]"
                 onClick={() => setStep((s) => s + 1)}
                 disabled={!ok}
-                style={{ fontSize: 19, letterSpacing: 3 }}
               >
                 Next →
               </button>
@@ -261,11 +222,10 @@ export default function WizardShell() {
           )}
 
           {step === STEPS.length - 1 && (
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <div className="flex justify-start">
               <button
-                className="btn"
+                className="btn text-base tracking-[3px]"
                 onClick={() => setStep((s) => s - 1)}
-                style={{ fontSize: 19, letterSpacing: 3 }}
               >
                 ← Back
               </button>
@@ -275,42 +235,12 @@ export default function WizardShell() {
 
         {/* Example builds sidebar */}
         {sidebarOpen && (
-          <div
-            style={{
-              width: 280,
-              flexShrink: 0,
-              border: '1px solid var(--amber-deep)',
-              background: 'rgba(61,46,15,0.15)',
-            }}
-          >
-            <div
-              style={{
-                padding: '10px 14px',
-                borderBottom: '1px solid var(--amber-deep)',
-                background: 'rgba(61,46,15,0.3)',
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 17,
-                  letterSpacing: 3,
-                  color: 'var(--red-stamp)',
-                  textTransform: 'uppercase',
-                  marginBottom: 4,
-                }}
-              >
+          <div className="w-[280px] shrink-0 border border-amber-deep bg-[rgba(61,46,15,0.15)]">
+            <div className="px-3.5 py-2.5 border-b border-amber-deep bg-[rgba(61,46,15,0.3)]">
+              <div className="font-mono text-base tracking-[3px] text-red-stamp uppercase mb-1">
                 Inspiration Only
               </div>
-              <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 30,
-                  color: 'var(--concrete)',
-                  letterSpacing: 1,
-                  lineHeight: 1.4,
-                }}
-              >
+              <div className="font-mono text-[30px] text-concrete tracking-[1px] leading-[1.4]">
                 Viewing these does not change your character.
               </div>
             </div>
@@ -319,53 +249,27 @@ export default function WizardShell() {
               {EXAMPLE_BUILDS.map((build) => {
                 const open = expandedBuild === build.name
                 return (
-                  <div key={build.name} style={{ borderBottom: '1px solid var(--concrete-dark)' }}>
+                  <div key={build.name} className="border-b border-concrete-dark">
                     <button
                       onClick={() => setExpandedBuild(open ? null : build.name)}
-                      style={{
-                        width: '100%',
-                        padding: '10px 14px',
-                        background: 'transparent',
-                        border: 'none',
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
+                      className="w-full px-3.5 py-2.5 bg-transparent border-none text-left cursor-pointer flex justify-between items-center"
                     >
-                      <div
-                        style={{
-                          fontFamily: '"Special Elite", serif',
-                          fontSize: 17,
-                          color: 'var(--off-white)',
-                          letterSpacing: 1,
-                        }}
-                      >
+                      <div className="font-display text-base text-off-white tracking-[1px]">
                         {build.name}
                       </div>
-                      <span style={{ color: 'var(--concrete)', fontSize: 30 }}>{open ? '▲' : '▼'}</span>
+                      <span className="text-concrete text-[30px]">{open ? '▲' : '▼'}</span>
                     </button>
 
                     {open && (
-                      <div style={{ padding: '0 14px 14px', fontSize: 30 }}>
-                        <div
-                          style={{
-                            fontFamily: '"Share Tech Mono", monospace',
-                            color: 'var(--concrete)',
-                            letterSpacing: 1,
-                            fontStyle: 'italic',
-                            marginBottom: 10,
-                            lineHeight: 1.5,
-                          }}
-                        >
+                      <div className="px-3.5 pb-3.5 text-[30px]">
+                        <div className="font-mono text-concrete tracking-[1px] italic mb-2.5 leading-relaxed">
                           {build.tagline}
                         </div>
 
                         <BuildRow label="Attrs">
-                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                          <div className="flex gap-1 flex-wrap">
                             {Object.entries(build.attrs).map(([k, v]) => (
-                              <span key={k} style={{ color: 'var(--amber)', fontFamily: '"Share Tech Mono", monospace', fontSize: 30 }}>
+                              <span key={k} className="text-amber font-mono text-[30px]">
                                 {k}:{v}
                               </span>
                             ))}
@@ -373,34 +277,34 @@ export default function WizardShell() {
                         </BuildRow>
 
                         <BuildRow label="Expert">
-                          <span style={{ color: 'var(--amber)', fontFamily: '"Share Tech Mono", monospace', fontSize: 30 }}>
+                          <span className="text-amber font-mono text-[30px]">
                             {build.expertSkill}
                           </span>
-                          <div style={{ color: 'var(--concrete)', fontFamily: '"Share Tech Mono", monospace', fontSize: 17, marginTop: 2 }}>
+                          <div className="text-concrete font-mono text-base mt-0.5">
                             {build.expertSpecs.join(', ')}
                           </div>
                         </BuildRow>
 
                         <BuildRow label="Trained">
                           {build.trainedSkills.map((s) => (
-                            <div key={s} style={{ color: 'var(--concrete-light)', fontFamily: '"Share Tech Mono", monospace', fontSize: 30 }}>
+                            <div key={s} className="text-concrete-light font-mono text-[30px]">
                               {s}
                             </div>
                           ))}
                         </BuildRow>
 
                         <BuildRow label="Talent">
-                          <div style={{ fontFamily: '"Special Elite", serif', fontSize: 19, color: 'var(--off-white)', marginBottom: 2 }}>
+                          <div className="font-display text-lg text-off-white mb-0.5">
                             {build.talent}
                           </div>
-                          <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--concrete)', lineHeight: 1.5 }}>
+                          <div className="font-mono text-base text-concrete leading-relaxed">
                             {build.talentDesc}
                           </div>
                         </BuildRow>
 
                         <BuildRow label="Tags">
                           {build.bgTags.map((t) => (
-                            <div key={t} style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--amber-dim)' }}>
+                            <div key={t} className="font-mono text-base text-amber-dim">
                               {t}
                             </div>
                           ))}
@@ -420,17 +324,8 @@ export default function WizardShell() {
 
 function BuildRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: 8 }}>
-      <div
-        style={{
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 36,
-          letterSpacing: 3,
-          color: 'var(--amber-dim)',
-          textTransform: 'uppercase',
-          marginBottom: 3,
-        }}
-      >
+    <div className="mb-2">
+      <div className="font-mono text-[36px] tracking-[3px] text-amber-dim uppercase mb-0.75">
         {label}
       </div>
       {children}

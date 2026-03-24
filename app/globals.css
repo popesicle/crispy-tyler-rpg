@@ -128,6 +128,17 @@ h1, h2, h3, .display {
   background: rgba(139, 26, 26, 0.2);
 }
 
+/* ── Labels ─────────────────────────────────────────────── */
+.label-style {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 30px;
+  letter-spacing: 3px;
+  color: var(--amber-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
 /* ── Inputs ─────────────────────────────────────────────── */
 .input {
   font-family: 'Share Tech Mono', monospace;

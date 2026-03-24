@@ -13,48 +13,19 @@ export default function AttributeBlock({ attrs }: { attrs: Attributes }) {
   return (
     <div>
       <div className="section-label">Attributes</div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}>
+      <div className="grid grid-cols-3 gap-1">
         {ATTRS.map(({ key, label }) => (
           <div
             key={key}
-            style={{
-              border: '1px solid var(--concrete-dark)',
-              padding: '10px 8px',
-              textAlign: 'center',
-              background: 'rgba(255,255,255,0.02)',
-            }}
+            className="border border-concrete-dark px-2 py-2.5 text-center bg-white/[0.02]"
           >
-            <div
-              style={{
-                fontFamily: '"Special Elite", serif',
-                fontSize: 32,
-                color: 'var(--amber)',
-                lineHeight: 1,
-                marginBottom: 4,
-              }}
-            >
+            <div className="font-display text-[32px] text-amber leading-none mb-1">
               {attrs[key]}
             </div>
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 13,
-                letterSpacing: 2,
-                color: 'var(--concrete)',
-                textTransform: 'uppercase',
-              }}
-            >
+            <div className="font-mono text-xs tracking-[2px] text-concrete uppercase">
               {key}
             </div>
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 12,
-                color: 'var(--concrete-dark)',
-                letterSpacing: 1,
-                marginTop: 1,
-              }}
-            >
+            <div className="font-mono text-[11px] text-concrete-dark tracking-[1px] mt-0.5">
               {label}
             </div>
           </div>
@@ -62,41 +33,16 @@ export default function AttributeBlock({ attrs }: { attrs: Attributes }) {
       </div>
 
       {/* Proficiency dice */}
-      <div
-        style={{
-          marginTop: 10,
-          padding: '8px 10px',
-          border: '1px solid var(--amber-deep)',
-          background: 'rgba(200,164,90,0.04)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-        }}
-      >
-        <div style={{ display: 'flex', gap: 5 }}>
+      <div className="mt-2.5 px-2.5 py-2 border border-amber-deep bg-[rgba(200,164,90,0.04)] flex items-center gap-2.5">
+        <div className="flex gap-1.25">
           <Die />
           <Die />
         </div>
         <div>
-          <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 14,
-              color: 'var(--amber)',
-              letterSpacing: 2,
-            }}
-          >
+          <div className="font-mono text-sm text-amber tracking-[2px]">
             2d6 Proficiency
           </div>
-          <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 12,
-              color: 'var(--concrete)',
-              letterSpacing: 1,
-              marginTop: 1,
-            }}
-          >
+          <div className="font-mono text-xs text-concrete tracking-[1px] mt-0.5">
             Added to every roll
           </div>
         </div>

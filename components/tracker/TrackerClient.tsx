@@ -107,104 +107,55 @@ export default function TrackerClient({ character }: Props) {
   return (
     <div>
       {/* ── Header ──────────────────────────────────────── */}
-      <div
-        style={{
-          marginBottom: 24,
-          paddingBottom: 16,
-          borderBottom: '1px solid var(--concrete-dark)',
-        }}
-      >
+      <div className="mb-6 pb-4 border-b border-concrete-dark">
         {/* Top bar: name, actions, save status */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="flex items-start gap-4 flex-wrap">
+          <div className="flex-1 min-w-0">
             <div className="section-label">Federal Remediation Commission — Operative File</div>
-            <h1
-              style={{
-                fontFamily: '"Special Elite", serif',
-                fontSize: 32,
-                color: 'var(--amber)',
-                margin: '0 0 4px',
-                letterSpacing: 2,
-                lineHeight: 1,
-              }}
-            >
+            <h1 className="font-display text-[32px] text-amber m-0 mb-1 tracking-[2px] leading-none">
               {character.name}
             </h1>
             {character.codename && (
-              <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 14,
-                  color: 'var(--amber-dim)',
-                  letterSpacing: 3,
-                }}
-              >
+              <div className="font-mono text-sm text-amber-dim tracking-[3px]">
                 &ldquo;{character.codename}&rdquo;
               </div>
             )}
           </div>
 
           {/* Badges + actions */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-              <div className="stamp" style={{ fontSize: 13, padding: '1px 6px' }}>
+          <div className="flex flex-col items-end gap-2">
+            <div className="flex gap-2 flex-wrap justify-end">
+              <div className="stamp text-[13px] px-1.5 py-0.5">
                 FRC
               </div>
-              <div
-                className="stamp"
-                style={{
-                  fontSize: 13,
-                  padding: '1px 6px',
-                  textTransform: 'uppercase',
-                  letterSpacing: 2,
-                }}
-              >
+              <div className="stamp text-[13px] px-1.5 py-0.5 uppercase tracking-[2px]">
                 {character.armor} armor
               </div>
               {fatigue >= character.attrs.CON && (
-                <div
-                  style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 14,
-                    letterSpacing: 3,
-                    color: 'var(--red-stamp)',
-                    border: '1px solid var(--red-stamp)',
-                    padding: '1px 6px',
-                    textTransform: 'uppercase',
-                  }}
-                >
+                <div className="font-display text-sm tracking-[3px] text-red-stamp border border-red-stamp px-1.5 py-0.5 uppercase">
                   {fatigue > character.attrs.CON ? 'DOWN' : 'WOUNDED'}
                 </div>
               )}
             </div>
 
-            <div style={{ display: 'flex', gap: 6 }}>
+            <div className="flex gap-1.5">
               <Link
                 href={`/character/${character.id}/print`}
-                className="btn"
-                style={{ fontSize: 13, letterSpacing: 2, padding: '4px 10px' }}
+                className="btn text-xs tracking-[2px] px-[10px] py-1"
                 target="_blank"
               >
                 Print Sheet
               </Link>
               <Link
                 href="/roster"
-                className="btn"
-                style={{ fontSize: 13, letterSpacing: 2, padding: '4px 10px' }}
+                className="btn text-xs tracking-[2px] px-[10px] py-1"
               >
                 ← Roster
               </Link>
             </div>
 
             {/* Save indicator */}
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 12,
-                color: saving ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                letterSpacing: 2,
-              }}
-            >
+            <div className={`font-mono text-xs tracking-[2px] ${saving ? 'text-amber-dim' : 'text-concrete-dark'}`}
               {saving
                 ? '● Saving...'
                 : lastSaved
@@ -216,16 +167,9 @@ export default function TrackerClient({ character }: Props) {
       </div>
 
       {/* ── Main grid ────────────────────────────────────── */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 20,
-          alignItems: 'start',
-        }}
-      >
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5 items-start">
         {/* Left column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div className="flex flex-col gap-5">
           {/* Attributes */}
           <div className="panel">
             <AttributeBlock attrs={character.attrs} />
@@ -254,32 +198,17 @@ export default function TrackerClient({ character }: Props) {
           {/* Armor + Weapons quick ref */}
           <div className="panel">
             <div className="section-label">Loadout</div>
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 16,
-                color: 'var(--concrete-light)',
-                letterSpacing: 1,
-                marginBottom: 8,
-              }}
-            >
+            <div className="font-mono text-base text-concrete-light tracking-[1px] mb-2">
               {armorLabel}
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <div className="flex flex-col gap-0.5">
               {character.weapons.map((w, i) => (
                 <div
                   key={i}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '5px 8px',
-                    border: '1px solid var(--concrete-dark)',
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 16,
-                  }}
+                  className="flex justify-between px-2 py-1.25 border border-concrete-dark font-mono text-base"
                 >
-                  <span style={{ color: 'var(--off-white)' }}>{w.name}</span>
-                  <span style={{ color: 'var(--amber-dim)' }}>{w.damage}</span>
+                  <span className="text-off-white">{w.name}</span>
+                  <span className="text-amber-dim">{w.damage}</span>
                 </div>
               ))}
             </div>
@@ -287,55 +216,25 @@ export default function TrackerClient({ character }: Props) {
         </div>
 
         {/* Right column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div className="flex flex-col gap-5">
           {/* Skills */}
           <div className="panel">
             <div className="section-label">Skills</div>
 
             {expertSkill && (
-              <div style={{ marginBottom: 12 }}>
-                <div
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 12,
-                    letterSpacing: 3,
-                    color: 'var(--amber-dim)',
-                    textTransform: 'uppercase',
-                    marginBottom: 4,
-                  }}
-                >
+              <div className="mb-3">
+                <div className="font-mono text-xs tracking-[3px] text-amber-dim uppercase mb-1">
                   Expert
                 </div>
-                <div
-                  style={{
-                    padding: '8px 12px',
-                    border: '1px solid var(--amber-deep)',
-                    background: 'rgba(200,164,90,0.06)',
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: '"Special Elite", serif',
-                      fontSize: 18,
-                      color: 'var(--amber)',
-                      letterSpacing: 1,
-                      marginBottom: 4,
-                    }}
-                  >
+                <div className="px-3 py-2 border border-amber-deep bg-[rgba(200,164,90,0.06)]">
+                  <div className="font-display text-lg text-amber tracking-[1px] mb-1">
                     {expertSkill.name}
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                  <div className="flex flex-wrap gap-1">
                     {expertSkill.specializations.map((spec) => (
                       <div
                         key={spec}
-                        style={{
-                          fontFamily: '"Share Tech Mono", monospace',
-                          fontSize: 13,
-                          color: 'var(--amber-dim)',
-                          border: '1px solid var(--amber-deep)',
-                          padding: '1px 6px',
-                          letterSpacing: 1,
-                        }}
+                        className="font-mono text-xs text-amber-dim border border-amber-deep px-1.5 py-0.5 tracking-[1px]"
                       >
                         {spec}
                       </div>
@@ -346,30 +245,14 @@ export default function TrackerClient({ character }: Props) {
             )}
 
             <div>
-              <div
-                style={{
-                  fontFamily: '"Share Tech Mono", monospace',
-                  fontSize: 12,
-                  letterSpacing: 3,
-                  color: 'var(--concrete)',
-                  textTransform: 'uppercase',
-                  marginBottom: 4,
-                }}
-              >
+              <div className="font-mono text-xs tracking-[3px] text-concrete uppercase mb-1">
                 Trained
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div className="flex flex-col gap-0.5">
                 {trainedSkills.map((s) => (
                   <div
                     key={s.name}
-                    style={{
-                      fontFamily: '"Share Tech Mono", monospace',
-                      fontSize: 16,
-                      color: 'var(--concrete-light)',
-                      padding: '5px 8px',
-                      border: '1px solid var(--concrete-dark)',
-                      letterSpacing: 1,
-                    }}
+                    className="font-mono text-base text-concrete-light px-2 py-1.25 border border-concrete-dark tracking-[1px]"
                   >
                     {s.name}
                   </div>
@@ -381,26 +264,10 @@ export default function TrackerClient({ character }: Props) {
           {/* Talent */}
           <div className="panel">
             <div className="section-label">Talent</div>
-            <div
-              style={{
-                fontFamily: '"Special Elite", serif',
-                fontSize: 18,
-                color: 'var(--off-white)',
-                letterSpacing: 1,
-                marginBottom: 6,
-              }}
-            >
+            <div className="font-display text-lg text-off-white tracking-[1px] mb-1.5">
               {character.talent}
             </div>
-            <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 14,
-                color: 'var(--concrete)',
-                letterSpacing: 1,
-                lineHeight: 1.6,
-              }}
-            >
+            <div className="font-mono text-sm text-concrete tracking-[1px] leading-relaxed">
               {character.talentDesc}
             </div>
           </div>
@@ -413,7 +280,7 @@ export default function TrackerClient({ character }: Props) {
       </div>
 
       {/* ── Full-width sections ──────────────────────────── */}
-      <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div className="mt-5 flex flex-col gap-5">
         {/* Weird Operations */}
         <div className="panel">
           <WoPanel activeAuras={activeAuras} onChange={updateAuras} />
@@ -422,40 +289,21 @@ export default function TrackerClient({ character }: Props) {
         {/* Background Tags */}
         <div className="panel">
           <div className="section-label">Background Tags</div>
-          <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 13,
-              color: 'var(--concrete)',
-              letterSpacing: 2,
-              marginBottom: 10,
-              lineHeight: 1.5,
-            }}
-          >
+          <div className="font-mono text-xs text-concrete tracking-[2px] mb-2.5 leading-relaxed">
             Once per scene, when a tag applies, click to mark as used. Resets on page reload.
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          <div className="flex flex-wrap gap-2">
             {character.bgTags.map((tag) => {
               const used = usedBgTags.includes(tag)
               return (
                 <button
                   key={tag}
                   onClick={() => toggleBgTag(tag)}
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 16,
-                    letterSpacing: 1,
-                    padding: '6px 14px',
-                    border: `1px solid ${used ? 'var(--concrete-dark)' : 'var(--amber-deep)'}`,
-                    background: used
-                      ? 'rgba(255,255,255,0.02)'
-                      : 'rgba(200,164,90,0.08)',
-                    color: used ? 'var(--concrete)' : 'var(--amber)',
-                    cursor: 'pointer',
-                    textDecoration: used ? 'line-through' : 'none',
-                    opacity: used ? 0.6 : 1,
-                    transition: 'all 0.15s',
-                  }}
+                  className={`font-mono text-base tracking-[1px] px-3.5 py-1.5 transition-all duration-150 cursor-pointer ${
+                    used
+                      ? 'border border-concrete-dark bg-white/[0.02] text-concrete line-through opacity-60'
+                      : 'border border-amber-deep bg-[rgba(200,164,90,0.08)] text-amber'
+                  }`}
                 >
                   {tag}
                 </button>
@@ -477,7 +325,6 @@ export default function TrackerClient({ character }: Props) {
             value={notes}
             onChange={(e) => updateNotes(e.target.value)}
             placeholder="Session notes, reminders, active threats..."
-            style={{ minHeight: 120, width: '100%' }}
           />
         </div>
 
@@ -485,16 +332,7 @@ export default function TrackerClient({ character }: Props) {
         {character.backstory && (
           <div className="panel">
             <div className="section-label">Personnel File — Backstory</div>
-            <p
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 14,
-                color: 'var(--concrete)',
-                letterSpacing: 1,
-                lineHeight: 1.7,
-                margin: 0,
-              }}
-            >
+            <p className="font-mono text-sm text-concrete tracking-[1px] leading-relaxed m-0">
               {character.backstory}
             </p>
           </div>

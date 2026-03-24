@@ -32,93 +32,61 @@ export default function StepAttributes({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Operative Profile</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Attributes
       </h2>
 
       {/* Points counter */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          marginBottom: 28,
-          padding: '10px 14px',
-          border: `1px solid ${remaining === 0 ? 'var(--olive)' : 'var(--amber-deep)'}`,
+          borderColor: remaining === 0 ? 'var(--olive)' : 'var(--amber-deep)',
           background: remaining === 0 ? 'rgba(107,122,62,0.1)' : 'rgba(61,46,15,0.3)',
-          transition: 'all 0.2s',
         }}
+        className="flex items-center gap-3 mb-7 p-3 border transition-all duration-200"
       >
         <div
           style={{
-            fontFamily: '"Special Elite", serif',
-            fontSize: 36,
             color: remaining === 0 ? 'var(--olive)' : 'var(--amber)',
-            lineHeight: 1,
-            minWidth: 40,
           }}
+          className="font-display text-4xl leading-none min-w-10"
         >
           {remaining}
         </div>
         <div>
           <div
-            style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 30,
-              letterSpacing: 3,
-              color: 'var(--amber-dim)',
-              textTransform: 'uppercase',
-            }}
+            className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase"
           >
             Points Remaining
           </div>
           <div
             style={{
-              fontFamily: '"Share Tech Mono", monospace',
-              fontSize: 19,
               color: remaining === 0 ? 'var(--olive)' : 'var(--concrete)',
             }}
+            className="font-mono text-base"
           >
             {remaining === 0 ? 'All points assigned — proceed when ready.' : `Distribute ${attributePoints} points total across 6 attributes (min ${attributeMin}, max ${attributeMax}).`}
           </div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div className="flex flex-col gap-1">
         {ATTRS.map(({ key, label, desc }) => {
           const val = state.attrs[key]
           return (
             <div
               key={key}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '52px 1fr auto',
-                alignItems: 'center',
-                gap: 16,
-                padding: '12px 14px',
-                border: '1px solid var(--concrete-dark)',
-                background: 'rgba(255,255,255,0.02)',
-              }}
+              className="grid items-center gap-4 p-3 border border-concrete-dark bg-white/[0.02]"
+              style={{ gridTemplateColumns: '52px 1fr auto' }}
             >
               {/* Stat abbreviation */}
-              <div style={{ textAlign: 'center' }}>
+              <div className="text-center">
                 <div
-                  style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 36,
-                    color: 'var(--amber)',
-                    letterSpacing: 1,
-                  }}
+                  className="font-display text-4xl text-amber tracking-wide"
                 >
                   {key}
                 </div>
                 <div
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 36,
-                    color: 'var(--concrete)',
-                    letterSpacing: 1,
-                  }}
+                  className="font-mono text-4xl text-concrete tracking-wide"
                 >
                   {label.toUpperCase()}
                 </div>
@@ -127,17 +95,11 @@ export default function StepAttributes({ state, onChange }: Props) {
               {/* Description + pip dots */}
               <div>
                 <div
-                  style={{
-                    fontFamily: '"Share Tech Mono", monospace',
-                    fontSize: 30,
-                    color: 'var(--concrete)',
-                    letterSpacing: 1,
-                    marginBottom: 4,
-                  }}
+                  className="font-mono text-2xl text-concrete tracking-wide mb-1"
                 >
                   {desc}
                 </div>
-                <div style={{ display: 'flex', gap: 3 }}>
+                <div className="flex gap-0.5">
                   {Array.from({ length: attributeMax }).map((_, i) => (
                     <div
                       key={i}
@@ -145,42 +107,36 @@ export default function StepAttributes({ state, onChange }: Props) {
                         width: 12,
                         height: 12,
                         background: i < val ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                        border: `1px solid ${i < val ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                        borderColor: i < val ? 'var(--amber)' : 'var(--concrete-dark)',
                       }}
+                      className="border"
                     />
                   ))}
                 </div>
               </div>
 
               {/* Controls */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div className="flex items-center gap-2.5">
                 <button
                   onClick={() => adjust(key, -1)}
                   disabled={val <= attributeMin}
+                  className="w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all"
                   style={{
-                    ...controlBtnStyle,
                     opacity: val <= attributeMin ? 0.3 : 1,
                   }}
                 >
                   −
                 </button>
                 <span
-                  style={{
-                    fontFamily: '"Special Elite", serif',
-                    fontSize: 30,
-                    color: 'var(--off-white)',
-                    minWidth: 24,
-                    textAlign: 'center',
-                    lineHeight: 1,
-                  }}
+                  className="font-display text-2xl text-off-white min-w-6 text-center leading-none"
                 >
                   {val}
                 </span>
                 <button
                   onClick={() => adjust(key, 1)}
                   disabled={val >= attributeMax || remaining <= 0}
+                  className="w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all"
                   style={{
-                    ...controlBtnStyle,
                     opacity: val >= attributeMax || remaining <= 0 ? 0.3 : 1,
                   }}
                 >
@@ -193,19 +149,4 @@ export default function StepAttributes({ state, onChange }: Props) {
       </div>
     </div>
   )
-}
-
-const controlBtnStyle: React.CSSProperties = {
-  width: 28,
-  height: 28,
-  background: 'transparent',
-  border: '1px solid var(--amber-dim)',
-  color: 'var(--amber)',
-  fontFamily: '"Share Tech Mono", monospace',
-  fontSize: 36,
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  lineHeight: 1,
 }

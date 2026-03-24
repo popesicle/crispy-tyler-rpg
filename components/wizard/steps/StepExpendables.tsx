@@ -29,40 +29,31 @@ export default function StepExpendables({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Operational Supplies</div>
-      <h2 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', marginBottom: 8 }}>
+      <h2 className="font-display text-4xl text-amber mb-2">
         Expendables
       </h2>
 
       {/* Counter */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          marginBottom: 24,
-          padding: '10px 14px',
-          border: `1px solid ${full ? 'var(--olive)' : 'var(--amber-deep)'}`,
+          borderColor: full ? 'var(--olive)' : 'var(--amber-deep)',
           background: full ? 'rgba(107,122,62,0.1)' : 'rgba(61,46,15,0.2)',
         }}
+        className="flex items-center gap-3 mb-6 p-3 border"
       >
         <div
           style={{
-            fontFamily: '"Special Elite", serif',
-            fontSize: 36,
             color: full ? 'var(--olive)' : 'var(--amber)',
-            lineHeight: 1,
-            minWidth: 40,
           }}
+          className="font-display text-4xl leading-none min-w-10"
         >
           {count}/{MAX}
         </div>
         <div
           style={{
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 19,
             color: full ? 'var(--olive)' : 'var(--concrete)',
-            letterSpacing: 1,
           }}
+          className="font-mono text-base tracking-wide"
         >
           {full
             ? 'Loadout complete. Proceed when ready.'
@@ -75,9 +66,9 @@ export default function StepExpendables({ state, onChange }: Props) {
         const catItems = EXPENDABLES.filter((e) => e.cat === cat)
 
         return (
-          <div key={cat} style={{ marginBottom: 16 }}>
-            <div className="section-label" style={{ marginBottom: 8 }}>{cat}</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div key={cat} className="mb-4">
+            <div className="section-label mb-2">{cat}</div>
+            <div className="flex flex-col gap-1">
               {catItems.map((item) => {
                 const selected = state.expendables.includes(item.name)
                 const disabled = !selected && full
@@ -87,49 +78,40 @@ export default function StepExpendables({ state, onChange }: Props) {
                   <div
                     key={item.name}
                     style={{
-                      border: `1px solid ${selected ? 'var(--amber)' : 'var(--concrete-dark)'}`,
+                      borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
                       background: selected
                         ? 'rgba(200,164,90,0.07)'
                         : disabled
                         ? 'rgba(255,255,255,0.01)'
                         : 'rgba(255,255,255,0.02)',
                       opacity: disabled ? 0.5 : 1,
-                      transition: 'all 0.15s',
                     }}
+                    className="border transition-all duration-150"
                   >
                     {/* Card header row */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div className="flex items-center gap-2.5">
                       {/* Select checkbox */}
                       <button
                         onClick={() => !disabled && toggle(item.name)}
                         disabled={disabled}
                         style={{
-                          width: 44,
-                          alignSelf: 'stretch',
                           background: selected ? 'rgba(200,164,90,0.15)' : 'transparent',
-                          border: 'none',
-                          borderRight: `1px solid ${selected ? 'var(--amber-dim)' : 'var(--concrete-dark)'}`,
-                          cursor: disabled ? 'not-allowed' : 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: 30,
+                          borderRightColor: selected ? 'var(--amber-dim)' : 'var(--concrete-dark)',
                           color: selected ? 'var(--amber)' : 'var(--concrete-dark)',
-                          flexShrink: 0,
                         }}
+                        className="w-11 self-stretch border-r flex items-center justify-center text-2xl flex-shrink-0"
+                        style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
                       >
                         {selected ? '✓' : '○'}
                       </button>
 
                       {/* Name */}
-                      <div style={{ flex: 1, padding: '10px 0' }}>
+                      <div className="flex-1 py-2.5">
                         <div
                           style={{
-                            fontFamily: '"Special Elite", serif',
-                            fontSize: 19,
                             color: selected ? 'var(--amber)' : 'var(--off-white)',
-                            letterSpacing: 1,
                           }}
+                          className="font-display text-base tracking-wide"
                         >
                           {item.name}
                         </div>
@@ -138,17 +120,7 @@ export default function StepExpendables({ state, onChange }: Props) {
                       {/* Expand toggle */}
                       <button
                         onClick={() => setExpanded(isExpanded ? null : item.name)}
-                        style={{
-                          padding: '10px 14px',
-                          background: 'transparent',
-                          border: 'none',
-                          cursor: 'pointer',
-                          color: 'var(--concrete)',
-                          fontSize: 19,
-                          fontFamily: '"Share Tech Mono", monospace',
-                          letterSpacing: 2,
-                          flexShrink: 0,
-                        }}
+                        className="px-3.5 py-2.5 bg-transparent border-0 cursor-pointer text-concrete font-mono text-base tracking-[2px] flex-shrink-0"
                       >
                         {isExpanded ? 'HIDE' : 'INFO'}
                       </button>
@@ -156,60 +128,21 @@ export default function StepExpendables({ state, onChange }: Props) {
 
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div
-                        style={{
-                          padding: '0 14px 14px 44px',
-                          borderTop: '1px solid var(--concrete-dark)',
-                        }}
-                      >
-                        <div style={{ paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <div className="px-3.5 pb-3.5 pl-11 border-t border-concrete-dark">
+                        <div className="pt-3 flex flex-col gap-2">
                           <div>
-                            <div
-                              style={{
-                                fontFamily: '"Share Tech Mono", monospace',
-                                fontSize: 17,
-                                letterSpacing: 3,
-                                color: 'var(--olive)',
-                                textTransform: 'uppercase',
-                                marginBottom: 4,
-                              }}
-                            >
+                            <div className="font-mono text-sm tracking-[3px] text-olive uppercase mb-1">
                               Effect
                             </div>
-                            <div
-                              style={{
-                                fontFamily: '"Share Tech Mono", monospace',
-                                fontSize: 19,
-                                color: 'var(--concrete-light)',
-                                letterSpacing: 1,
-                                lineHeight: 1.6,
-                              }}
-                            >
+                            <div className="font-mono text-base text-concrete-light tracking-wide leading-relaxed">
                               {item.effect}
                             </div>
                           </div>
                           <div>
-                            <div
-                              style={{
-                                fontFamily: '"Share Tech Mono", monospace',
-                                fontSize: 17,
-                                letterSpacing: 3,
-                                color: 'var(--red-stamp)',
-                                textTransform: 'uppercase',
-                                marginBottom: 4,
-                              }}
-                            >
+                            <div className="font-mono text-sm tracking-[3px] text-red-stamp uppercase mb-1">
                               Drawback
                             </div>
-                            <div
-                              style={{
-                                fontFamily: '"Share Tech Mono", monospace',
-                                fontSize: 19,
-                                color: 'var(--concrete)',
-                                letterSpacing: 1,
-                                lineHeight: 1.6,
-                              }}
-                            >
+                            <div className="font-mono text-base text-concrete tracking-wide leading-relaxed">
                               {item.drawback}
                             </div>
                           </div>
