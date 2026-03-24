@@ -98,7 +98,7 @@ export default function TrackerClient({ character }: Props) {
 
   const expertSkill = character.skills.find((s) => s.level === 'expert')
   const trainedSkills = character.skills.filter((s) => s.level === 'trained')
-  const armorLabel = {
+  const armorLabel: string | undefined = {
     light: 'Light — Soak 1d6, Initiative +1',
     medium: 'Medium — Soak 2d6',
     heavy: 'Heavy — Soak 3d6, Initiative −1',
@@ -155,7 +155,7 @@ export default function TrackerClient({ character }: Props) {
             </div>
 
             {/* Save indicator */}
-            <div className={`font-mono text-xs tracking-[2px] ${saving ? 'text-amber-dim' : 'text-concrete-dark'}`}
+            <div className={`font-mono text-xs tracking-[2px] ${saving ? 'text-amber-dim' : 'text-concrete-dark'}`}>
               {saving
                 ? '● Saving...'
                 : lastSaved
