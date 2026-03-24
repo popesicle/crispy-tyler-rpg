@@ -1,4 +1,5 @@
 import { AURAS, WORDS_OF_POWER } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   activeAuras: string[]
@@ -30,41 +31,42 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
               key={aura.name}
               onClick={() => toggleAura(aura.name)}
               style={{
-                borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
                 background: active ? 'rgba(200,164,90,0.1)' : 'rgba(255,255,255,0.02)',
               }}
-              className="px-3 py-3 border transition-all duration-150 cursor-pointer text-left"
+              className={cn(
+                'px-3 py-3 border transition-all duration-150 cursor-pointer text-left',
+                active ? 'border-amber' : 'border-concrete-dark'
+              )}
             >
               <div className="flex items-center gap-2 mb-1">
                 <div
-                  style={{
-                    borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
-                    background: active ? 'var(--amber-dim)' : 'transparent',
-                  }}
-                  className="w-2 h-2 border rounded-full shrink-0"
+                  className={cn(
+                    'w-2 h-2 border rounded-full shrink-0',
+                    active ? 'border-amber bg-amber-dim' : 'border-concrete-dark bg-transparent'
+                  )}
                 />
                 <div
-                  style={{
-                    color: active ? 'var(--amber)' : 'var(--concrete)',
-                  }}
-                  className="font-display text-[30px] tracking-[1px]"
+                  className={cn(
+                    'font-display text-[30px] tracking-[1px]',
+                    active ? 'text-amber' : 'text-concrete'
+                  )}
                 >
                   {aura.name}
                 </div>
               </div>
               <div
-                style={{
-                  color: active ? 'var(--concrete-light)' : 'var(--concrete-dark)',
-                }}
-                className="font-mono text-base tracking-[1px] leading-relaxed mb-1"
+                className={cn(
+                  'font-mono text-base tracking-[1px] leading-relaxed mb-1',
+                  active ? 'text-concrete-light' : 'text-concrete-dark'
+                )}
               >
                 {aura.effect}
               </div>
               <div
-                style={{
-                  color: active ? 'var(--red-stamp)' : 'var(--concrete-dark)',
-                }}
-                className="font-mono text-base tracking-[1px]"
+                className={cn(
+                  'font-mono text-base tracking-[1px]',
+                  active ? 'text-red-stamp' : 'text-concrete-dark'
+                )}
               >
                 Cost: {aura.cost}
               </div>

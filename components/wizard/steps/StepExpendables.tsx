@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { WizardState } from '@/types/character'
 import { EXPENDABLES, CREATION_RULES } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   state: WizardState
@@ -35,25 +36,24 @@ export default function StepExpendables({ state, onChange }: Props) {
 
       {/* Counter */}
       <div
-        style={{
-          borderColor: full ? 'var(--olive)' : 'var(--amber-deep)',
-          background: full ? 'rgba(107,122,62,0.1)' : 'rgba(61,46,15,0.2)',
-        }}
-        className="flex items-center gap-3 mb-6 p-3 border"
+        className={cn(
+          'flex items-center gap-3 mb-6 p-3 border',
+          full ? 'border-olive bg-[rgba(107,122,62,0.1)]' : 'border-amber-deep bg-[rgba(61,46,15,0.2)]'
+        )}
       >
         <div
-          style={{
-            color: full ? 'var(--olive)' : 'var(--amber)',
-          }}
-          className="font-display text-4xl leading-none min-w-10"
+          className={cn(
+            'font-display text-4xl leading-none min-w-10',
+            full ? 'text-olive' : 'text-amber'
+          )}
         >
           {count}/{MAX}
         </div>
         <div
-          style={{
-            color: full ? 'var(--olive)' : 'var(--concrete)',
-          }}
-          className="font-mono text-base tracking-wide"
+          className={cn(
+            'font-mono text-base tracking-wide',
+            full ? 'text-olive' : 'text-concrete'
+          )}
         >
           {full
             ? 'Loadout complete. Proceed when ready.'
@@ -78,7 +78,6 @@ export default function StepExpendables({ state, onChange }: Props) {
                   <div
                     key={item.name}
                     style={{
-                      borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
                       background: selected
                         ? 'rgba(200,164,90,0.07)'
                         : disabled
@@ -86,7 +85,10 @@ export default function StepExpendables({ state, onChange }: Props) {
                         : 'rgba(255,255,255,0.02)',
                       opacity: disabled ? 0.5 : 1,
                     }}
-                    className="border transition-all duration-150"
+                    className={cn(
+                      'border transition-all duration-150',
+                      selected ? 'border-amber' : 'border-concrete-dark'
+                    )}
                   >
                     {/* Card header row */}
                     <div className="flex items-center gap-2.5">
@@ -96,11 +98,12 @@ export default function StepExpendables({ state, onChange }: Props) {
                         disabled={disabled}
                         style={{
                           background: selected ? 'rgba(200,164,90,0.15)' : 'transparent',
-                          borderRightColor: selected ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                          color: selected ? 'var(--amber)' : 'var(--concrete-dark)',
+                          cursor: disabled ? 'not-allowed' : 'pointer',
                         }}
-                        className="w-11 self-stretch border-r flex items-center justify-center text-2xl flex-shrink-0"
-                        style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
+                        className={cn(
+                          'w-11 self-stretch border-r flex items-center justify-center text-2xl flex-shrink-0',
+                          selected ? 'border-r-amber-dim text-amber' : 'border-r-concrete-dark text-concrete-dark'
+                        )}
                       >
                         {selected ? '✓' : '○'}
                       </button>
@@ -108,10 +111,10 @@ export default function StepExpendables({ state, onChange }: Props) {
                       {/* Name */}
                       <div className="flex-1 py-2.5">
                         <div
-                          style={{
-                            color: selected ? 'var(--amber)' : 'var(--off-white)',
-                          }}
-                          className="font-display text-base tracking-wide"
+                          className={cn(
+                            'font-display text-base tracking-wide',
+                            selected ? 'text-amber' : 'text-off-white'
+                          )}
                         >
                           {item.name}
                         </div>

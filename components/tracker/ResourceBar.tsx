@@ -1,3 +1,5 @@
+import { cn } from '@/lib/cn'
+
 interface Props {
   type: 'fatigue' | 'stress'
   value: number
@@ -40,8 +42,12 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
         </div>
         {badge && (
           <div
-            style={{ borderColor: badge.color, color: badge.color }}
-            className="font-display text-sm tracking-[3px] border px-2 py-0.5 uppercase"
+            className={cn(
+              'font-display text-sm tracking-[3px] border px-2 py-0.5 uppercase',
+              badge.color === 'var(--red-stamp)' && 'border-red-stamp text-red-stamp',
+              badge.color === '#c06020' && 'text-orange-600 border-orange-600'
+            )}
+            style={badge.color === '#b02020' ? { borderColor: '#b02020', color: '#b02020' } : undefined}
           >
             {badge.label}
           </div>
@@ -69,7 +75,9 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
                 background: filled ? (isOverflow ? overflowColor : fillColor) : 'transparent',
                 color: filled ? 'transparent' : 'var(--concrete-dark)',
               }}
-              className="w-[22px] h-[22px] border p-0 transition-all duration-100 flex items-center justify-center font-mono text-sm cursor-pointer"
+              className={cn(
+                'w-[22px] h-[22px] border p-0 transition-all duration-100 flex items-center justify-center font-mono text-sm cursor-pointer'
+              )}
             >
               {isOverflow && !filled ? '×' : ''}
             </button>
@@ -87,7 +95,7 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
 
       {isFatigue && (
         <div className="mt-1.5 font-mono text-xs text-concrete-dark tracking-[1px]">
-          At {max}: <span style={{ color: 'var(--red-stamp)' }}>WOUNDED</span> (−1 die physical) &nbsp;|&nbsp; Overflow:{' '}
+          At {max}: <span className="text-red-stamp">WOUNDED</span> (−1 die physical) &nbsp;|&nbsp; Overflow:{' '}
           <span style={{ color: '#b02020' }}>DOWN</span>
         </div>
       )}

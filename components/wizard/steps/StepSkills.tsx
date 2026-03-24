@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { WizardState } from '@/types/character'
 import { SKILLS, CREATION_RULES } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   state: WizardState
@@ -118,9 +119,11 @@ export default function StepSkills({ state, onChange }: Props) {
               onClick={() => setExpandedCat(open ? null : cat)}
               style={{
                 background: open ? 'rgba(200,164,90,0.06)' : 'rgba(255,255,255,0.02)',
-                borderColor: open ? 'var(--amber-deep)' : 'var(--concrete-dark)',
               }}
-              className="w-full flex items-center justify-between px-3.5 py-2 border text-left"
+              className={cn(
+                'w-full flex items-center justify-between px-3.5 py-2 border text-left',
+                open ? 'border-amber-deep' : 'border-concrete-dark'
+              )}
             >
               <span className="font-mono text-2xl tracking-[4px] text-amber-dim uppercase">
                 {cat}
@@ -150,10 +153,10 @@ export default function StepSkills({ state, onChange }: Props) {
                         {/* Skill name + attr */}
                         <div className="flex-1">
                           <div
-                            style={{
-                              color: isExpert ? 'var(--amber)' : isTrained ? 'var(--off-white)' : 'var(--concrete)',
-                            }}
-                            className="font-mono text-sm"
+                            className={cn(
+                              'font-mono text-sm',
+                              isExpert ? 'text-amber' : isTrained ? 'text-off-white' : 'text-concrete'
+                            )}
                           >
                             {skill.name}
                           </div>
@@ -168,13 +171,11 @@ export default function StepSkills({ state, onChange }: Props) {
                         <button
                           onClick={() => toggleTrained(skill.name)}
                           disabled={!isTrained && (trainedCount >= TRAINED_MAX || isExpert)}
-                          style={{
-                            borderColor: isTrained ? 'var(--concrete-light)' : 'var(--concrete-dark)',
-                            color: isTrained ? 'var(--off-white)' : 'var(--concrete-dark)',
-                            background: isTrained ? 'rgba(181,179,172,0.15)' : 'transparent',
-                          }}
-                          className="w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center"
-                          style={{ opacity: !isTrained && (trainedCount >= TRAINED_MAX || isExpert) ? 0.35 : 1 }}
+                          className={cn(
+                            'w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center',
+                            isTrained ? 'border-concrete-light bg-[rgba(181,179,172,0.15)] text-off-white' : 'border-concrete-dark bg-transparent text-concrete-dark',
+                            !isTrained && (trainedCount >= TRAINED_MAX || isExpert) && 'opacity-35'
+                          )}
                         >
                           T
                         </button>
@@ -183,13 +184,11 @@ export default function StepSkills({ state, onChange }: Props) {
                         <button
                           onClick={() => toggleExpert(skill.name)}
                           disabled={!isExpert && (!!expertSkill || isTrained)}
-                          style={{
-                            borderColor: isExpert ? 'var(--amber)' : 'var(--concrete-dark)',
-                            color: isExpert ? 'var(--amber)' : 'var(--concrete-dark)',
-                            background: isExpert ? 'rgba(200,164,90,0.15)' : 'transparent',
-                          }}
-                          className="w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center"
-                          style={{ opacity: !isExpert && (!!expertSkill || isTrained) ? 0.35 : 1 }}
+                          className={cn(
+                            'w-7 h-7 font-mono text-base font-bold tracking-wide border cursor-pointer flex-shrink-0 transition-all flex items-center justify-center',
+                            isExpert ? 'border-amber bg-[rgba(200,164,90,0.15)] text-amber' : 'border-concrete-dark bg-transparent text-concrete-dark',
+                            !isExpert && (!!expertSkill || isTrained) && 'opacity-35'
+                          )}
                         >
                           E
                         </button>
@@ -208,12 +207,10 @@ export default function StepSkills({ state, onChange }: Props) {
                                 <button
                                   key={spec}
                                   onClick={() => toggleSpec(skill.name, spec)}
-                                  style={{
-                                    background: active ? 'rgba(200,164,90,0.2)' : 'transparent',
-                                    borderColor: active ? 'var(--amber)' : 'var(--concrete-dark)',
-                                    color: active ? 'var(--amber)' : 'var(--concrete)',
-                                  }}
-                                  className="font-mono text-base px-2.5 py-1 border cursor-pointer tracking-wide"
+                                  className={cn(
+                                    'font-mono text-base px-2.5 py-1 border cursor-pointer tracking-wide',
+                                    active ? 'border-amber bg-[rgba(200,164,90,0.2)] text-amber' : 'border-concrete-dark bg-transparent text-concrete'
+                                  )}
                                 >
                                   {active ? '✓ ' : ''}{spec}
                                 </button>
@@ -237,12 +234,10 @@ export default function StepSkills({ state, onChange }: Props) {
 function StatusPill({ label, count, max, ok }: { label: string; count: number; max: number | null; ok: boolean }) {
   return (
     <div
-      style={{
-        borderColor: ok ? 'var(--olive)' : 'var(--concrete-dark)',
-        background: ok ? 'rgba(107,122,62,0.1)' : 'transparent',
-        color: ok ? 'var(--olive)' : 'var(--concrete)',
-      }}
-      className="px-3 py-1.25 border font-mono text-base tracking-wide whitespace-nowrap"
+      className={cn(
+        'px-3 py-1.25 border font-mono text-base tracking-wide whitespace-nowrap',
+        ok ? 'border-olive bg-[rgba(107,122,62,0.1)] text-olive' : 'border-concrete-dark bg-transparent text-concrete'
+      )}
     >
       {label}: {count}{max !== null ? `/${max}` : ''}
     </div>

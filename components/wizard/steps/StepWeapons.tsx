@@ -1,6 +1,7 @@
 'use client'
 
 import { WizardState, Weapon } from '@/types/character'
+import { cn } from '@/lib/cn'
 
 interface Props {
   state: WizardState
@@ -91,12 +92,10 @@ export default function StepWeapons({ state, onChange }: Props) {
                   <button
                     key={opt}
                     onClick={() => updatePrimary({ damage: opt })}
-                    style={{
-                      borderColor: sel ? 'var(--amber)' : 'var(--concrete-dark)',
-                      background: sel ? 'rgba(200,164,90,0.12)' : 'transparent',
-                      color: sel ? 'var(--amber)' : 'var(--concrete)',
-                    }}
-                    className="font-mono text-4xl px-3.5 py-1.5 border cursor-pointer tracking-wide"
+                    className={cn(
+                      'font-mono text-4xl px-3.5 py-1.5 border cursor-pointer tracking-wide',
+                      sel ? 'border-amber bg-[rgba(200,164,90,0.12)] text-amber' : 'border-concrete-dark bg-transparent text-concrete'
+                    )}
                   >
                     {opt}
                   </button>

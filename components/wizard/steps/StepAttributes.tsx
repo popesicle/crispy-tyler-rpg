@@ -1,5 +1,6 @@
 import { WizardState, AttributeKey, Attributes } from '@/types/character'
 import { CREATION_RULES } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   state: WizardState
@@ -38,17 +39,16 @@ export default function StepAttributes({ state, onChange }: Props) {
 
       {/* Points counter */}
       <div
-        style={{
-          borderColor: remaining === 0 ? 'var(--olive)' : 'var(--amber-deep)',
-          background: remaining === 0 ? 'rgba(107,122,62,0.1)' : 'rgba(61,46,15,0.3)',
-        }}
-        className="flex items-center gap-3 mb-7 p-3 border transition-all duration-200"
+        className={cn(
+          'flex items-center gap-3 mb-7 p-3 border transition-all duration-200',
+          remaining === 0 ? 'border-olive bg-[rgba(107,122,62,0.1)]' : 'border-amber-deep bg-[rgba(61,46,15,0.3)]'
+        )}
       >
         <div
-          style={{
-            color: remaining === 0 ? 'var(--olive)' : 'var(--amber)',
-          }}
-          className="font-display text-4xl leading-none min-w-10"
+          className={cn(
+            'font-display text-4xl leading-none min-w-10',
+            remaining === 0 ? 'text-olive' : 'text-amber'
+          )}
         >
           {remaining}
         </div>
@@ -59,10 +59,10 @@ export default function StepAttributes({ state, onChange }: Props) {
             Points Remaining
           </div>
           <div
-            style={{
-              color: remaining === 0 ? 'var(--olive)' : 'var(--concrete)',
-            }}
-            className="font-mono text-base"
+            className={cn(
+              'font-mono text-base',
+              remaining === 0 ? 'text-olive' : 'text-concrete'
+            )}
           >
             {remaining === 0 ? 'All points assigned — proceed when ready.' : `Distribute ${attributePoints} points total across 6 attributes (min ${attributeMin}, max ${attributeMax}).`}
           </div>
@@ -106,10 +106,11 @@ export default function StepAttributes({ state, onChange }: Props) {
                       style={{
                         width: 12,
                         height: 12,
-                        background: i < val ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                        borderColor: i < val ? 'var(--amber)' : 'var(--concrete-dark)',
                       }}
-                      className="border"
+                      className={cn(
+                        'border',
+                        i < val ? 'border-amber bg-amber-dim' : 'border-concrete-dark bg-concrete-dark'
+                      )}
                     />
                   ))}
                 </div>
@@ -120,10 +121,10 @@ export default function StepAttributes({ state, onChange }: Props) {
                 <button
                   onClick={() => adjust(key, -1)}
                   disabled={val <= attributeMin}
-                  className="w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all"
-                  style={{
-                    opacity: val <= attributeMin ? 0.3 : 1,
-                  }}
+                  className={cn(
+                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all',
+                    val <= attributeMin && 'opacity-30'
+                  )}
                 >
                   −
                 </button>
@@ -135,10 +136,10 @@ export default function StepAttributes({ state, onChange }: Props) {
                 <button
                   onClick={() => adjust(key, 1)}
                   disabled={val >= attributeMax || remaining <= 0}
-                  className="w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all"
-                  style={{
-                    opacity: val >= attributeMax || remaining <= 0 ? 0.3 : 1,
-                  }}
+                  className={cn(
+                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all',
+                    (val >= attributeMax || remaining <= 0) && 'opacity-30'
+                  )}
                 >
                   +
                 </button>

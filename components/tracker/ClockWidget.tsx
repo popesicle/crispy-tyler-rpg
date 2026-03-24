@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Clock } from '@/types/character'
+import { cn } from '@/lib/cn'
 
 interface Props {
   clocks: Clock[]
@@ -176,17 +177,17 @@ function ClockCard({
 
   return (
     <div
-      style={{
-        borderColor: isProgress ? 'var(--olive-dim)' : 'var(--red-stamp)',
-      }}
-      className={`border bg-white/[0.02] px-3 py-3 flex flex-col items-center gap-1.5 min-w-[120px]`}
+      className={cn(
+        'border bg-white/[0.02] px-3 py-3 flex flex-col items-center gap-1.5 min-w-[120px]',
+        isProgress ? 'border-olive-dim' : 'border-red-stamp'
+      )}
     >
       {/* Type badge */}
       <div
-        style={{
-          color: isProgress ? 'var(--olive)' : 'var(--red-stamp)',
-        }}
-        className="font-mono text-[36px] tracking-[3px] uppercase"
+        className={cn(
+          'font-mono text-[36px] tracking-[3px] uppercase',
+          isProgress ? 'text-olive' : 'text-red-stamp'
+        )}
       >
         {clock.type}
       </div>

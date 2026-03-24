@@ -1,5 +1,6 @@
 import { WizardState, ArmorType } from '@/types/character'
 import { ARMOR_OPTIONS } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   state: WizardState
@@ -28,11 +29,13 @@ export default function StepArmor({ state, onChange }: Props) {
               key={armor.type}
               onClick={() => onChange({ armor: armor.type as ArmorType })}
               style={{
-                borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
                 background: selected ? 'rgba(200,164,90,0.08)' : 'rgba(255,255,255,0.02)',
                 gridTemplateColumns: '80px 1fr auto',
               }}
-              className="w-full grid gap-4 px-5 py-[18px] border transition-all duration-150 items-center text-left"
+              className={cn(
+                'w-full grid gap-4 px-5 py-[18px] border transition-all duration-150 items-center text-left',
+                selected ? 'border-amber' : 'border-concrete-dark'
+              )}
             >
               {/* Selected indicator + label */}
               <div className="flex items-center gap-2.5">
@@ -40,12 +43,16 @@ export default function StepArmor({ state, onChange }: Props) {
                   style={{
                     width: 14,
                     height: 14,
-                    borderColor: selected ? 'var(--amber)' : 'var(--concrete-dark)',
-                    background: selected ? 'var(--amber-dim)' : 'transparent',
                   }}
-                  className="border flex-shrink-0"
+                  className={cn(
+                    'border flex-shrink-0',
+                    selected ? 'border-amber bg-amber-dim' : 'border-concrete-dark bg-transparent'
+                  )}
                 />
-                <div className="font-display text-2xl tracking-wide" style={{ color: selected ? 'var(--amber)' : 'var(--off-white)' }}>
+                <div className={cn(
+                  'font-display text-2xl tracking-wide',
+                  selected ? 'text-amber' : 'text-off-white'
+                )}>
                   {armor.label}
                 </div>
               </div>
@@ -53,10 +60,10 @@ export default function StepArmor({ state, onChange }: Props) {
               {/* Description */}
               <div>
                 <div
-                  className="font-mono text-base tracking-wide mb-0.5"
-                  style={{
-                    color: selected ? 'var(--off-white)' : 'var(--concrete)',
-                  }}
+                  className={cn(
+                    'font-mono text-base tracking-wide mb-0.5',
+                    selected ? 'text-off-white' : 'text-concrete'
+                  )}
                 >
                   {armor.description}
                 </div>
@@ -65,18 +72,18 @@ export default function StepArmor({ state, onChange }: Props) {
               {/* Stats */}
               <div className="text-right flex-shrink-0">
                 <div
-                  className="font-mono text-sm tracking-wide"
-                  style={{
-                    color: selected ? 'var(--amber)' : 'var(--concrete-light)',
-                  }}
+                  className={cn(
+                    'font-mono text-sm tracking-wide',
+                    selected ? 'text-amber' : 'text-concrete-light'
+                  )}
                 >
                   {armor.soak}
                 </div>
                 <div
-                  className="font-mono text-2xl tracking-wide mt-0.5"
-                  style={{
-                    color: selected ? 'var(--amber-dim)' : 'var(--concrete-dark)',
-                  }}
+                  className={cn(
+                    'font-mono text-2xl tracking-wide mt-0.5',
+                    selected ? 'text-amber-dim' : 'text-concrete-dark'
+                  )}
                 >
                   {armor.modifier}
                 </div>

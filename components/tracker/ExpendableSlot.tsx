@@ -1,5 +1,6 @@
 import { Expendable } from '@/types/character'
 import { EXPENDABLES } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 
 interface Props {
   expendables: Expendable[]
@@ -22,28 +23,29 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
               key={item.name}
               onClick={() => toggle(item.name)}
               style={{
-                borderColor: item.used ? 'var(--concrete-dark)' : 'var(--amber-dim)',
                 background: item.used ? 'rgba(255,255,255,0.01)' : 'rgba(200,164,90,0.05)',
                 opacity: item.used ? 0.55 : 1,
               }}
-              className="flex items-center gap-3 px-3.5 py-2.5 border transition-all duration-150 cursor-pointer text-left w-full relative"
+              className={cn(
+                'flex items-center gap-3 px-3.5 py-2.5 border transition-all duration-150 cursor-pointer text-left w-full relative',
+                item.used ? 'border-concrete-dark' : 'border-amber-dim'
+              )}
             >
               {/* Status indicator */}
               <div
-                style={{
-                  borderColor: item.used ? 'var(--concrete-dark)' : 'var(--amber)',
-                  background: item.used ? 'transparent' : 'var(--amber-dim)',
-                }}
-                className="w-2.5 h-2.5 border shrink-0 rounded-full"
+                className={cn(
+                  'w-2.5 h-2.5 border shrink-0 rounded-full',
+                  item.used ? 'border-concrete-dark bg-transparent' : 'border-amber bg-amber-dim'
+                )}
               />
 
               {/* Name + category */}
               <div className="flex-1">
                 <div
-                  style={{
-                    color: item.used ? 'var(--concrete)' : 'var(--off-white)',
-                  }}
-                  className={`font-display text-lg tracking-[1px] ${item.used ? 'line-through' : ''}`}
+                  className={cn(
+                    'font-display text-lg tracking-[1px]',
+                    item.used ? 'text-concrete line-through' : 'text-off-white'
+                  )}
                 >
                   {item.name}
                 </div>

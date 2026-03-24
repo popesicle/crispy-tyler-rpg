@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { WizardState, ArmorType } from '@/types/character'
 import { CREATION_RULES, EXAMPLE_BUILDS } from '@/lib/game-data'
+import { cn } from '@/lib/cn'
 import StepIdentity from './steps/StepIdentity'
 import StepAttributes from './steps/StepAttributes'
 import StepSkills from './steps/StepSkills'
@@ -139,26 +140,26 @@ export default function WizardShell() {
               onClick={() => i < step && setStep(i)}
               disabled={i > step}
               style={{
-                borderBottomColor: active ? 'var(--amber)' : 'transparent',
                 cursor: i < step ? 'pointer' : 'default',
               }}
-              className="flex flex-col items-center gap-0.75 px-3 py-2 bg-transparent border-b-2 shrink-0 -mb-0.25"
+              className={cn(
+                'flex flex-col items-center gap-0.75 px-3 py-2 bg-transparent border-b-2 shrink-0 -mb-0.25',
+                active ? 'border-b-amber' : 'border-b-transparent'
+              )}
             >
               <div
-                style={{
-                  borderColor: active ? 'var(--amber)' : done ? 'var(--olive)' : 'var(--concrete-dark)',
-                  background: active ? 'var(--amber-deep)' : done ? 'rgba(107,122,62,0.2)' : 'transparent',
-                  color: active ? 'var(--amber)' : done ? 'var(--olive)' : 'var(--concrete-dark)',
-                }}
-                className="w-[22px] h-[22px] border flex items-center justify-center font-mono text-[30px]"
+                className={cn(
+                  'w-[22px] h-[22px] border flex items-center justify-center font-mono text-[30px]',
+                  active ? 'border-amber bg-amber-deep text-amber' : done ? 'border-olive bg-[rgba(107,122,62,0.2)] text-olive' : 'border-concrete-dark bg-transparent text-concrete-dark'
+                )}
               >
                 {done ? '✓' : i + 1}
               </div>
               <div
-                style={{
-                  color: active ? 'var(--amber)' : done ? 'var(--concrete)' : 'var(--concrete-dark)',
-                }}
-                className="font-mono text-[36px] tracking-[2px] uppercase"
+                className={cn(
+                  'font-mono text-[36px] tracking-[2px] uppercase',
+                  active ? 'text-amber' : done ? 'text-concrete' : 'text-concrete-dark'
+                )}
               >
                 {s.label}
               </div>
@@ -203,10 +204,10 @@ export default function WizardShell() {
               </button>
 
               <div
-                style={{
-                  color: ok ? 'var(--olive)' : 'var(--red-stamp)',
-                }}
-                className="font-mono text-[30px] tracking-[2px]"
+                className={cn(
+                  'font-mono text-[30px] tracking-[2px]',
+                  ok ? 'text-olive' : 'text-red-stamp'
+                )}
               >
                 {ok ? '— ready —' : validationMessage(step)}
               </div>
