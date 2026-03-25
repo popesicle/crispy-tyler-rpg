@@ -54,7 +54,7 @@ export default function ReferencePage() {
             <div className="flex flex-col gap-0.5">
               {SKILLS.filter((s) => s.cat === cat).map((s) => (
                 <div key={s.name} className="flex gap-3 p-1.5 border border-concrete-dark">
-                  <div className="font-mono text-4xl text-off-white min-w-[220px]">{s.name}</div>
+                  <div className="font-mono text-2xl text-off-white min-w-[220px]">{s.name}</div>
                   <div className="font-mono text-base text-amber-dim tracking-[1px] self-center">{s.attr}</div>
                 </div>
               ))}

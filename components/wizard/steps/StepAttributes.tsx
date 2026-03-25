@@ -70,7 +70,7 @@ export default function StepAttributes({ state, onChange }: Props) {
       </div>
 
       <div className="flex flex-col gap-1">
-        {ATTRS.map(({ key, label, desc }) => {
+        {ATTRS.map(({ key, desc }) => {
           const val = state.attrs[key]
           return (
             <div
@@ -81,21 +81,16 @@ export default function StepAttributes({ state, onChange }: Props) {
               {/* Stat abbreviation */}
               <div className="text-center">
                 <div
-                  className="font-display text-4xl text-amber tracking-wide"
+                  className="font-display text-xl text-amber tracking-wide"
                 >
                   {key}
-                </div>
-                <div
-                  className="font-mono text-4xl text-concrete tracking-wide"
-                >
-                  {label.toUpperCase()}
                 </div>
               </div>
 
               {/* Description + pip dots */}
               <div>
                 <div
-                  className="font-mono text-2xl text-concrete tracking-wide mb-1"
+                  className="font-mono text-xxl text-concrete tracking-wide mb-1"
                 >
                   {desc}
                 </div>

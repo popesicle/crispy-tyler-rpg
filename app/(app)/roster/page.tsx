@@ -17,7 +17,7 @@ export default async function RosterPage() {
       <div className="flex items-start justify-between mb-8">
         <div>
           <div className="section-label">Active Personnel</div>
-          <h1 className="font-display text-[36px] text-amber tracking-[2px] m-0">
+          <h1 className="font-display text-3xl text-amber tracking-[2px] m-0">
             Operative Roster
           </h1>
         </div>

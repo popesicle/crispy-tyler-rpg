@@ -9,7 +9,7 @@ export default function StepIdentity({ state, onChange }: Props) {
   return (
     <div>
       <div className="section-label">Personnel File</div>
-      <h2 className="font-display text-[36px] text-amber mb-6">
+      <h2 className="font-display text-3xl text-amber mb-6">
         Agent Identity
       </h2>
 
@@ -56,7 +56,7 @@ export default function StepIdentity({ state, onChange }: Props) {
       </div>
 
       <div className="mt-7 px-3.5 py-2.5 border border-concrete-dark bg-white/[0.01]">
-        <p className="font-mono text-3xl text-concrete tracking-[1px] m-0 leading-relaxed">
+        <p className="font-mono text-xl text-concrete tracking-[1px] m-0 leading-relaxed">
           FRC INTERNAL: All operative identities are classified at CONFIDENTIAL level or above.
           Codenames are assigned by field coordinators and may differ from self-selected aliases.
         </p>

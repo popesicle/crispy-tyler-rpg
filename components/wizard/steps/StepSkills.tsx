@@ -102,7 +102,7 @@ export default function StepSkills({ state, onChange }: Props) {
         )}
       </div>
 
-      <div className="mb-5 p-3 border border-concrete-dark font-mono text-2xl text-concrete tracking-wide leading-relaxed">
+      <div className="mb-5 p-3 border border-concrete-dark font-mono text-xl text-concrete tracking-wide leading-relaxed">
         Pick <strong className="text-off-white">3 Trained</strong> + <strong className="text-amber">1 Expert</strong>.
         Only the Expert skill gets specializations — pick at least 1 from its list.
         Trained skills carry no specializations.
@@ -122,7 +122,7 @@ export default function StepSkills({ state, onChange }: Props) {
                 open ? 'border-amber-deep bg-[rgba(200,164,90,0.06)]' : 'border-concrete-dark bg-white/[0.02]'
               )}
             >
-              <span className="font-mono text-2xl tracking-[4px] text-amber-dim uppercase">
+              <span className="font-mono text-xl tracking-[4px] text-amber-dim uppercase">
                 {cat}
               </span>
               <span className="text-concrete text-4xl">{open ? '▲' : '▼'}</span>
@@ -154,7 +154,7 @@ export default function StepSkills({ state, onChange }: Props) {
                             {skill.name}
                           </div>
                           <div
-                            className="font-mono text-sm text-concrete-dark tracking-[2px] mt-0.5"
+                            className="font-mono text-base text-concrete-dark tracking-[2px] mt-0.5"
                           >
                             {skill.attr}
                           </div>

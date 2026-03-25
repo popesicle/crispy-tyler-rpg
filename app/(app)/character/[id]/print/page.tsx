@@ -25,7 +25,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
         <PrintTrigger />
         <a
           href={`/character/${c.id}`}
-          className="ml-4 font-mono text-[36px] text-[#6b5428]"
+          className="ml-4 font-mono text-3xl text-[#6b5428]"
         >
           ← Back to Tracker
         </a>
@@ -45,12 +45,12 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
                 Federal Remediation Commission
               </div>
               <h1
-                className="font-display text-[36px] m-0 tracking-[2px] text-[var(--ink)]"
+                className="font-display text-3xl m-0 tracking-[2px] text-[var(--ink)]"
               >
                 {c.name}
               </h1>
               {c.codename && (
-                <div className="font-mono text-[36px] tracking-[2px] mt-0.5 text-[#8a6e35]">
+                <div className="font-mono text-3xl tracking-[2px] mt-0.5 text-[#8a6e35]">
                   &ldquo;{c.codename}&rdquo;
                 </div>
               )}
@@ -199,7 +199,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
         {/* Footer */}
         <div
-          className="mt-6 pt-2 border-t flex justify-between font-mono text-[36px] uppercase tracking-[2px] border-t-[#ccc] text-[#8a8880]"
+          className="mt-6 pt-2 border-t flex justify-between font-mono text-3xl uppercase tracking-[2px] border-t-[#ccc] text-[#8a8880]"
         >
           <span>FRC Form 7-OP — Operative Character Record</span>
           <span>Classified — Internal Use Only</span>
@@ -213,7 +213,7 @@ function PrintSection({ label, children }: { label: string; children: React.Reac
   return (
     <div>
       <div
-        className="font-mono text-[36px] tracking-[4px] uppercase border-b pb-0.75 mb-2 text-[#8a6e35] border-b-[#8a8880]"
+        className="font-mono text-3xl tracking-[4px] uppercase border-b pb-0.75 mb-2 text-[#8a6e35] border-b-[#8a8880]"
       >
         {label}
       </div>

@@ -29,20 +29,20 @@ export default function AppNav({ username }: { username: string }) {
         {/* Logo */}
         <Link
           href="/roster"
-          className="font-display text-[36px] text-amber tracking-[3px] no-underline mr-8 shrink-0"
+          className="font-display text-xl text-amber tracking-[3px] no-underline mr-8 shrink-0"
         >
           FRC
         </Link>
 
         {/* Nav links — desktop */}
-        <nav className="hidden md:flex gap-0.5 flex-1">
+        <nav className="hidden md:flex gap-0.5 flex-1 items-center">
           {NAV_LINKS.map((link) => {
             const active = pathname === link.href || pathname.startsWith(link.href + '/')
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-mono text-[19px] tracking-[3px] uppercase no-underline px-[14px] py-1.5 transition-colors duration-150 ${
+                className={`font-mono text-base tracking-[3px] uppercase no-underline px-[14px] py-1.5 transition-colors duration-150 ${
                   active
                     ? 'text-amber border-b-2 border-amber-dim'
                     : 'text-concrete border-b-2 border-transparent'
@@ -54,12 +54,9 @@ export default function AppNav({ username }: { username: string }) {
           })}
         </nav>
 
-        {/* Spacer for desktop */}
-        <div className="hidden md:flex flex-1" />
-
         {/* Agent + logout — desktop */}
         <div className="hidden md:flex items-center gap-3 shrink-0">
-          <span className="font-mono text-3xl tracking-[2px] text-concrete uppercase">
+          <span className="font-mono text-xl tracking-[2px] text-concrete uppercase">
             {username}
           </span>
           <button

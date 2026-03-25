@@ -62,7 +62,7 @@ export default function StepTalent({ state, onChange }: Props) {
               <div className="font-display text-2xl text-off-white mb-1">
                 {ex.name}
               </div>
-              <div className="font-mono text-2xl text-concrete tracking-wide leading-relaxed">
+              <div className="font-mono text-xl text-concrete tracking-wide leading-relaxed">
                 {ex.desc}
               </div>
             </div>

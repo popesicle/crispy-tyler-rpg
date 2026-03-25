@@ -46,7 +46,7 @@ export default function StepWeapons({ state, onChange }: Props) {
         >
           <div>
             <div
-              className="font-display text-4xl text-off-white tracking-wide"
+              className="font-display text-2xl text-off-white tracking-wide"
             >
               {PISTOL.name}
             </div>
@@ -57,7 +57,7 @@ export default function StepWeapons({ state, onChange }: Props) {
             </div>
           </div>
           <div
-            className="font-mono text-4xl text-olive tracking-[2px] border border-olive-dim px-2.5 py-0.5"
+            className="font-mono text-2xl text-olive tracking-[2px] border border-olive-dim px-2.5 py-0.5"
           >
             {PISTOL.damage}
           </div>
@@ -73,7 +73,7 @@ export default function StepWeapons({ state, onChange }: Props) {
           className="p-[18px] border border-concrete-dark bg-white/[0.02] flex flex-col gap-3.5"
         >
           <div>
-            <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Weapon Name</label>
+            <label className="font-mono text-xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Weapon Name</label>
             <input
               className="input"
               type="text"
@@ -84,7 +84,7 @@ export default function StepWeapons({ state, onChange }: Props) {
           </div>
 
           <div>
-            <label className="font-mono text-2xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Damage</label>
+            <label className="font-mono text-xl tracking-[3px] text-amber-dim uppercase block mb-1.5">Damage</label>
             <div className="flex gap-1.5">
               {DAMAGE_OPTIONS.map((opt) => {
                 const sel = (primary?.damage ?? '2 Fatigue') === opt
@@ -93,8 +93,8 @@ export default function StepWeapons({ state, onChange }: Props) {
                     key={opt}
                     onClick={() => updatePrimary({ damage: opt })}
                     className={cn(
-                      'font-mono text-4xl px-3.5 py-1.5 border cursor-pointer tracking-wide',
-                      sel ? 'border-amber bg-[rgba(200,164,90,0.12)] text-amber' : 'border-concrete-dark bg-transparent text-concrete'
+                      'font-mono text-xl px-3.5 py-1.5 border cursor-pointer tracking-wide',
+                      sel ? 'border-amber bg-[rgba(12,9,2,0.12)] text-amber' : 'border-concrete-dark bg-transparent text-concrete'
                     )}
                   >
                     {opt}
@@ -114,7 +114,7 @@ export default function StepWeapons({ state, onChange }: Props) {
             {state.weapons.map((w, i) => (
               <div
                 key={i}
-                className="flex justify-between px-3.5 py-2 border border-concrete-dark font-mono text-4xl"
+                className="flex justify-between px-3.5 py-2 border border-concrete-dark font-mono text-xl"
               >
                 <span className="text-off-white">{w.name}</span>
                 <span className="text-amber-dim">{w.damage}</span>

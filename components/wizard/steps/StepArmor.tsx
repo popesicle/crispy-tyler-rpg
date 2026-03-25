@@ -45,7 +45,7 @@ export default function StepArmor({ state, onChange }: Props) {
                   )}
                 />
                 <div className={cn(
-                  'font-display text-2xl tracking-wide',
+                  'font-display text-xl tracking-wide',
                   selected ? 'text-amber' : 'text-off-white'
                 )}>
                   {armor.label}
@@ -56,7 +56,7 @@ export default function StepArmor({ state, onChange }: Props) {
               <div>
                 <div
                   className={cn(
-                    'font-mono text-base tracking-wide mb-0.5',
+                    'font-mono text-base tracking-wide mb-0.5 px-3',
                     selected ? 'text-off-white' : 'text-concrete'
                   )}
                 >

@@ -147,7 +147,7 @@ export default function WizardShell() {
             >
               <div
                 className={cn(
-                  'w-[22px] h-[22px] border flex items-center justify-center font-mono text-3xl',
+                  'w-[22px] h-[22px] border flex items-center justify-center font-mono text-base',
                   active ? 'border-amber bg-amber-deep text-amber' : done ? 'border-olive bg-[rgba(107,122,62,0.2)] text-olive' : 'border-concrete-dark bg-transparent text-concrete-dark'
                 )}
               >
@@ -155,7 +155,7 @@ export default function WizardShell() {
               </div>
               <div
                 className={cn(
-                  'font-mono text-[36px] tracking-[2px] uppercase',
+                  'font-mono text-xl tracking-[2px] uppercase',
                   active ? 'text-amber' : done ? 'text-concrete' : 'text-concrete-dark'
                 )}
               >
@@ -203,7 +203,7 @@ export default function WizardShell() {
 
               <div
                 className={cn(
-                  'font-mono text-3xl tracking-[2px]',
+                  'font-mono text-xl tracking-[2px]',
                   ok ? 'text-olive' : 'text-red-stamp'
                 )}
               >
@@ -324,7 +324,7 @@ export default function WizardShell() {
 function BuildRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="mb-2">
-      <div className="font-mono text-[36px] tracking-[3px] text-amber-dim uppercase mb-0.75">
+      <div className="font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-0.75">
         {label}
       </div>
       {children}

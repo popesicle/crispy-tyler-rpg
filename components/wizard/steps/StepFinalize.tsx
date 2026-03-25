@@ -117,7 +117,7 @@ export default function StepFinalize({ state, onChange, onSubmit, submitting, er
           )}
           <div>
             <div
-              className="font-mono text-sm text-concrete tracking-[3px] uppercase mb-1"
+              className="font-mono text-base text-concrete tracking-[3px] uppercase mb-1"
             >
               Trained
             </div>

@@ -185,7 +185,7 @@ function ClockCard({
       {/* Type badge */}
       <div
         className={cn(
-          'font-mono text-[36px] tracking-[3px] uppercase',
+          'font-mono text-3xl tracking-[3px] uppercase',
           isProgress ? 'text-olive' : 'text-red-stamp'
         )}
       >
@@ -219,14 +219,14 @@ function ClockCard({
       </div>
 
       {/* Name */}
-      <div className="font-display text-[36px] text-off-white text-center tracking-[1px]">
+      <div className="font-display text-3xl text-off-white text-center tracking-[1px]">
         {clock.name}
       </div>
 
       {/* Delete */}
       <button
         onClick={onDelete}
-        className="btn btn-danger text-[36px] px-2 py-0.5 tracking-[2px]"
+        className="btn btn-danger text-3xl px-2 py-0.5 tracking-[2px]"
       >
         Remove
       </button>
