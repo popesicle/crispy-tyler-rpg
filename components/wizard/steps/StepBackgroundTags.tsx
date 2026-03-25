@@ -66,12 +66,11 @@ export default function StepBackgroundTags({ state, onChange }: Props) {
                 #{i + 1}
               </div>
               <input
-                className="input"
+                className="input flex-1"
                 type="text"
                 value={tag}
                 onChange={(e) => updateTag(i, e.target.value)}
                 placeholder={i === 0 ? 'e.g. Vietnam Vet (Recon), Former Academic, Odd Childhood' : 'e.g. Agency Black Ops, Former Cult Consultant'}
-                style={{ flex: 1 }}
               />
               {tags.length > MIN && (
                 <button

@@ -7,9 +7,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (!session) redirect('/login')
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="min-h-screen flex flex-col">
       <AppNav username={session.user.name ?? 'OPERATIVE'} />
-      <main style={{ flex: 1, padding: '24px 16px', maxWidth: 960, margin: '0 auto', width: '100%' }}>
+      <main className="flex-1 px-4 py-6 max-w-[960px] mx-auto w-full">
         {children}
       </main>
     </div>

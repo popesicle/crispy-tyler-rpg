@@ -117,12 +117,9 @@ export default function StepSkills({ state, onChange }: Props) {
             {/* Category header */}
             <button
               onClick={() => setExpandedCat(open ? null : cat)}
-              style={{
-                background: open ? 'rgba(200,164,90,0.06)' : 'rgba(255,255,255,0.02)',
-              }}
               className={cn(
                 'w-full flex items-center justify-between px-3.5 py-2 border text-left',
-                open ? 'border-amber-deep' : 'border-concrete-dark'
+                open ? 'border-amber-deep bg-[rgba(200,164,90,0.06)]' : 'border-concrete-dark bg-white/[0.02]'
               )}
             >
               <span className="font-mono text-2xl tracking-[4px] text-amber-dim uppercase">
@@ -132,7 +129,7 @@ export default function StepSkills({ state, onChange }: Props) {
             </button>
 
             {open && (
-              <div style={{ borderLeftColor: 'var(--amber-deep)' }} className="border-l-2 ml-1">
+              <div className="border-l-2 ml-1 border-l-[var(--amber-deep)]">
                 {catSkills.map((skill) => {
                   const sel = getSkill(skill.name)
                   const isTrained = sel?.level === 'trained'
@@ -141,14 +138,10 @@ export default function StepSkills({ state, onChange }: Props) {
                   return (
                     <div key={skill.name}>
                       <div
-                        style={{
-                          background: isExpert
-                            ? 'rgba(200,164,90,0.06)'
-                            : isTrained
-                            ? 'rgba(255,255,255,0.03)'
-                            : 'transparent',
-                        }}
-                        className="flex items-center gap-2.5 px-3.5 py-2.5 border-b border-concrete-dark"
+                        className={cn(
+                          'flex items-center gap-2.5 px-3.5 py-2.5 border-b border-concrete-dark',
+                          isExpert ? 'bg-[rgba(200,164,90,0.06)]' : isTrained ? 'bg-white/[0.03]' : 'bg-transparent'
+                        )}
                       >
                         {/* Skill name + attr */}
                         <div className="flex-1">

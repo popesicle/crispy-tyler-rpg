@@ -30,12 +30,9 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
             <button
               key={aura.name}
               onClick={() => toggleAura(aura.name)}
-              style={{
-                background: active ? 'rgba(200,164,90,0.1)' : 'rgba(255,255,255,0.02)',
-              }}
               className={cn(
                 'px-3 py-3 border transition-all duration-150 cursor-pointer text-left',
-                active ? 'border-amber' : 'border-concrete-dark'
+                active ? 'border-amber bg-[rgba(200,164,90,0.1)]' : 'border-concrete-dark bg-white/[0.02]'
               )}
             >
               <div className="flex items-center gap-2 mb-1">

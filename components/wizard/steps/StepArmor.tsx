@@ -29,23 +29,18 @@ export default function StepArmor({ state, onChange }: Props) {
               key={armor.type}
               onClick={() => onChange({ armor: armor.type as ArmorType })}
               style={{
-                background: selected ? 'rgba(200,164,90,0.08)' : 'rgba(255,255,255,0.02)',
                 gridTemplateColumns: '80px 1fr auto',
               }}
               className={cn(
                 'w-full grid gap-4 px-5 py-[18px] border transition-all duration-150 items-center text-left',
-                selected ? 'border-amber' : 'border-concrete-dark'
+                selected ? 'border-amber bg-[rgba(200,164,90,0.08)]' : 'border-concrete-dark bg-white/[0.02]'
               )}
             >
               {/* Selected indicator + label */}
               <div className="flex items-center gap-2.5">
                 <div
-                  style={{
-                    width: 14,
-                    height: 14,
-                  }}
                   className={cn(
-                    'border flex-shrink-0',
+                    'border flex-shrink-0 w-[14px] h-[14px]',
                     selected ? 'border-amber bg-amber-dim' : 'border-concrete-dark bg-transparent'
                   )}
                 />

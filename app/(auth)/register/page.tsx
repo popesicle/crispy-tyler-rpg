@@ -40,41 +40,21 @@ export default function RegisterPage() {
   }
 
   return (
-    <div style={{ width: '100%', maxWidth: 420 }}>
+    <div className="w-full max-w-[420px]">
       {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: 32 }}>
+      <div className="text-center mb-8">
         <div
-          style={{
-            fontFamily: '"Special Elite", serif',
-            fontSize: 19,
-            letterSpacing: 6,
-            color: 'var(--amber-dim)',
-            textTransform: 'uppercase',
-            marginBottom: 8,
-          }}
+          className="font-display text-base tracking-[6px] text-amber-dim uppercase mb-2"
         >
           Federal Remediation Commission
         </div>
         <div
-          style={{
-            fontFamily: '"Special Elite", serif',
-            fontSize: 36,
-            color: 'var(--amber)',
-            letterSpacing: 2,
-            lineHeight: 1.1,
-          }}
+          className="font-display text-4xl text-amber tracking-[2px] leading-tight"
         >
           FRC
         </div>
         <div
-          style={{
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 30,
-            letterSpacing: 4,
-            color: 'var(--concrete)',
-            textTransform: 'uppercase',
-            marginTop: 4,
-          }}
+          className="font-mono text-3xl tracking-[4px] text-concrete uppercase mt-1"
         >
           Personnel Registration
         </div>
@@ -82,45 +62,23 @@ export default function RegisterPage() {
 
       {/* Register panel */}
       <div
-        style={{
-          border: '1px solid var(--concrete-dark)',
-          background: 'rgba(255,255,255,0.02)',
-          padding: 28,
-        }}
+        className="border border-concrete-dark bg-white/[0.02] p-7"
       >
         <div
-          style={{
-            background: 'rgba(139,26,26,0.15)',
-            border: '1px solid var(--red-stamp)',
-            color: 'var(--concrete-light)',
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 30,
-            letterSpacing: 2,
-            padding: '8px 12px',
-            marginBottom: 24,
-            lineHeight: 1.5,
-          }}
+          className="bg-[rgba(139,26,26,0.15)] border border-red-stamp text-concrete-light font-mono text-3xl tracking-[2px] p-3 mb-6 leading-relaxed"
         >
           New operative registration. Credentials will be stored in secure FRC records.
           All activity is monitored and logged.
         </div>
 
-        <div className="section-label" style={{ marginBottom: 20 }}>
+        <div className="section-label mb-5">
           Register Operative
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 16 }}>
+          <div className="mb-4">
             <label
-              style={{
-                display: 'block',
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 30,
-                letterSpacing: 3,
-                color: 'var(--amber-dim)',
-                textTransform: 'uppercase',
-                marginBottom: 6,
-              }}
+              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Agent ID
             </label>
@@ -136,17 +94,9 @@ export default function RegisterPage() {
             />
           </div>
 
-          <div style={{ marginBottom: 16 }}>
+          <div className="mb-4">
             <label
-              style={{
-                display: 'block',
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 30,
-                letterSpacing: 3,
-                color: 'var(--amber-dim)',
-                textTransform: 'uppercase',
-                marginBottom: 6,
-              }}
+              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Passphrase
             </label>
@@ -162,17 +112,9 @@ export default function RegisterPage() {
             />
           </div>
 
-          <div style={{ marginBottom: 24 }}>
+          <div className="mb-6">
             <label
-              style={{
-                display: 'block',
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 30,
-                letterSpacing: 3,
-                color: 'var(--amber-dim)',
-                textTransform: 'uppercase',
-                marginBottom: 6,
-              }}
+              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Confirm Passphrase
             </label>
@@ -189,45 +131,28 @@ export default function RegisterPage() {
 
           {error && (
             <div
-              style={{
-                fontFamily: '"Share Tech Mono", monospace',
-                fontSize: 19,
-                color: 'var(--red-stamp)',
-                border: '1px solid var(--red-stamp)',
-                padding: '8px 10px',
-                marginBottom: 16,
-                letterSpacing: 1,
-              }}
+              className="font-mono text-base text-red-stamp border border-red-stamp p-2.5 mb-4 tracking-[1px]"
             >
               {error}
             </div>
           )}
 
           <button
-            className="btn btn-primary"
+            className="btn btn-primary w-full text-base py-2.5 tracking-[4px]"
             type="submit"
             disabled={loading}
-            style={{ width: '100%', fontSize: 17, padding: '10px 0', letterSpacing: 4 }}
           >
             {loading ? 'Submitting...' : 'File Registration'}
           </button>
         </form>
 
         <div
-          style={{
-            marginTop: 20,
-            paddingTop: 16,
-            borderTop: '1px solid var(--concrete-dark)',
-            fontFamily: '"Share Tech Mono", monospace',
-            fontSize: 19,
-            color: 'var(--concrete)',
-            textAlign: 'center',
-          }}
+          className="mt-5 pt-4 border-t border-concrete-dark font-mono text-base text-concrete text-center"
         >
           Already registered?{' '}
           <Link
             href="/login"
-            style={{ color: 'var(--amber-dim)', textDecoration: 'underline', letterSpacing: 1 }}
+            className="text-amber-dim underline tracking-[1px]"
           >
             Access Terminal
           </Link>
@@ -235,15 +160,7 @@ export default function RegisterPage() {
       </div>
 
       <div
-        style={{
-          marginTop: 16,
-          textAlign: 'center',
-          fontFamily: '"Share Tech Mono", monospace',
-          fontSize: 17,
-          color: 'var(--concrete-dark)',
-          letterSpacing: 2,
-          textTransform: 'uppercase',
-        }}
+        className="mt-4 text-center font-mono text-base text-concrete-dark tracking-[2px] uppercase"
       >
         FRC Form 7-OP — Operative Personnel Record
       </div>

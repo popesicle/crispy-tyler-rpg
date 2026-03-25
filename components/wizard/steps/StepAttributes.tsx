@@ -103,12 +103,8 @@ export default function StepAttributes({ state, onChange }: Props) {
                   {Array.from({ length: attributeMax }).map((_, i) => (
                     <div
                       key={i}
-                      style={{
-                        width: 12,
-                        height: 12,
-                      }}
                       className={cn(
-                        'border',
+                        'border w-3 h-3',
                         i < val ? 'border-amber bg-amber-dim' : 'border-concrete-dark bg-concrete-dark'
                       )}
                     />

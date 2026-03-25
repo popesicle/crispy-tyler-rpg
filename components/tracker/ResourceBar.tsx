@@ -45,9 +45,9 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
             className={cn(
               'font-display text-sm tracking-[3px] border px-2 py-0.5 uppercase',
               badge.color === 'var(--red-stamp)' && 'border-red-stamp text-red-stamp',
-              badge.color === '#c06020' && 'text-orange-600 border-orange-600'
+              badge.color === '#c06020' && 'text-orange-600 border-orange-600',
+              badge.color === '#b02020' && 'border-[#b02020] text-[#b02020]'
             )}
-            style={badge.color === '#b02020' ? { borderColor: '#b02020', color: '#b02020' } : undefined}
           >
             {badge.label}
           </div>
@@ -75,9 +75,7 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
                 background: filled ? (isOverflow ? overflowColor : fillColor) : 'transparent',
                 color: filled ? 'transparent' : 'var(--concrete-dark)',
               }}
-              className={cn(
-                'w-[22px] h-[22px] border p-0 transition-all duration-100 flex items-center justify-center font-mono text-sm cursor-pointer'
-              )}
+              className="w-[22px] h-[22px] border p-0 transition-all duration-100 flex items-center justify-center font-mono text-sm cursor-pointer"
             >
               {isOverflow && !filled ? '×' : ''}
             </button>
@@ -96,7 +94,7 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
       {isFatigue && (
         <div className="mt-1.5 font-mono text-xs text-concrete-dark tracking-[1px]">
           At {max}: <span className="text-red-stamp">WOUNDED</span> (−1 die physical) &nbsp;|&nbsp; Overflow:{' '}
-          <span style={{ color: '#b02020' }}>DOWN</span>
+          <span className="text-[#b02020]">DOWN</span>
         </div>
       )}
     </div>

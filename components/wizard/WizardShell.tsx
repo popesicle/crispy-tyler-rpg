@@ -139,12 +139,10 @@ export default function WizardShell() {
               key={s.label}
               onClick={() => i < step && setStep(i)}
               disabled={i > step}
-              style={{
-                cursor: i < step ? 'pointer' : 'default',
-              }}
               className={cn(
                 'flex flex-col items-center gap-0.75 px-3 py-2 bg-transparent border-b-2 shrink-0 -mb-0.25',
-                active ? 'border-b-amber' : 'border-b-transparent'
+                active ? 'border-b-amber' : 'border-b-transparent',
+                i < step ? 'cursor-pointer' : 'cursor-default'
               )}
             >
               <div

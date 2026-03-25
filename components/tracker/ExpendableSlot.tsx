@@ -22,13 +22,11 @@ export default function ExpendableSlot({ expendables, onChange }: Props) {
             <button
               key={item.name}
               onClick={() => toggle(item.name)}
-              style={{
-                background: item.used ? 'rgba(255,255,255,0.01)' : 'rgba(200,164,90,0.05)',
-                opacity: item.used ? 0.55 : 1,
-              }}
               className={cn(
                 'flex items-center gap-3 px-3.5 py-2.5 border transition-all duration-150 cursor-pointer text-left w-full relative',
-                item.used ? 'border-concrete-dark' : 'border-amber-dim'
+                item.used
+                  ? 'border-concrete-dark bg-white/[0.01] opacity-55'
+                  : 'border-amber-dim bg-[rgba(200,164,90,0.05)]'
               )}
             >
               {/* Status indicator */}

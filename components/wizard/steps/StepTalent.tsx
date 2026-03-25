@@ -42,11 +42,10 @@ export default function StepTalent({ state, onChange }: Props) {
             Talent Description <span className="text-red-stamp">*</span>
           </label>
           <textarea
-            className="input"
+            className="input min-h-[120px]"
             value={state.talentDesc}
             onChange={(e) => onChange({ talentDesc: e.target.value })}
             placeholder="Once per scene, when you [trigger condition], [effect]. [Any limits or costs]."
-            style={{ minHeight: 120 }}
           />
         </div>
       </div>

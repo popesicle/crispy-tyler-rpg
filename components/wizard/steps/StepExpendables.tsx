@@ -77,17 +77,14 @@ export default function StepExpendables({ state, onChange }: Props) {
                 return (
                   <div
                     key={item.name}
-                    style={{
-                      background: selected
-                        ? 'rgba(200,164,90,0.07)'
-                        : disabled
-                        ? 'rgba(255,255,255,0.01)'
-                        : 'rgba(255,255,255,0.02)',
-                      opacity: disabled ? 0.5 : 1,
-                    }}
                     className={cn(
                       'border transition-all duration-150',
-                      selected ? 'border-amber' : 'border-concrete-dark'
+                      selected
+                        ? 'border-amber bg-[rgba(200,164,90,0.07)]'
+                        : disabled
+                        ? 'border-concrete-dark bg-white/[0.01] opacity-50'
+                        : 'border-concrete-dark bg-white/[0.02]',
+                      disabled && 'opacity-50'
                     )}
                   >
                     {/* Card header row */}
@@ -96,13 +93,12 @@ export default function StepExpendables({ state, onChange }: Props) {
                       <button
                         onClick={() => !disabled && toggle(item.name)}
                         disabled={disabled}
-                        style={{
-                          background: selected ? 'rgba(200,164,90,0.15)' : 'transparent',
-                          cursor: disabled ? 'not-allowed' : 'pointer',
-                        }}
                         className={cn(
                           'w-11 self-stretch border-r flex items-center justify-center text-2xl flex-shrink-0',
-                          selected ? 'border-r-amber-dim text-amber' : 'border-r-concrete-dark text-concrete-dark'
+                          selected
+                            ? 'border-r-amber-dim text-amber bg-[rgba(200,164,90,0.15)]'
+                            : 'border-r-concrete-dark text-concrete-dark bg-transparent',
+                          disabled && 'cursor-not-allowed'
                         )}
                       >
                         {selected ? '✓' : '○'}
