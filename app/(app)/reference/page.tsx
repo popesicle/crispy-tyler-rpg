@@ -4,18 +4,18 @@ export default function ReferencePage() {
   return (
     <div>
       <div className="section-label">Quick Reference</div>
-      <h1 style={{ fontFamily: '"Special Elite", serif', fontSize: 36, color: 'var(--amber)', margin: '0 0 28px', letterSpacing: 2 }}>
+      <h1 className="font-display text-4xl text-amber mb-7 tracking-[2px]">
         Field Reference
       </h1>
 
       {/* Armor */}
       <Section label="Armor">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <div className="flex flex-col gap-1">
           {ARMOR_OPTIONS.map((a) => (
-            <div key={a.type} style={{ display: 'flex', gap: 12, padding: '8px 12px', border: '1px solid var(--concrete-dark)' }}>
-              <div style={{ fontFamily: '"Special Elite", serif', fontSize: 19, color: 'var(--off-white)', minWidth: 70 }}>{a.label}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 19, color: 'var(--amber-dim)' }}>{a.soak}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 19, color: 'var(--concrete)' }}>{a.modifier}</div>
+            <div key={a.type} className="flex gap-3 p-2 border border-concrete-dark">
+              <div className="font-display text-lg text-off-white min-w-[70px]">{a.label}</div>
+              <div className="font-mono text-lg text-amber-dim">{a.soak}</div>
+              <div className="font-mono text-lg text-concrete">{a.modifier}</div>
             </div>
           ))}
         </div>
@@ -23,12 +23,12 @@ export default function ReferencePage() {
 
       {/* Auras */}
       <Section label="Weird Operations — Auras">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8 }}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2">
           {AURAS.map((a) => (
-            <div key={a.name} style={{ padding: '10px', border: '1px solid var(--concrete-dark)' }}>
-              <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--amber)', marginBottom: 4 }}>{a.name}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 30, color: 'var(--concrete-light)', lineHeight: 1.5, marginBottom: 4 }}>{a.effect}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--red-stamp)', letterSpacing: 1 }}>Cost: {a.cost}</div>
+            <div key={a.name} className="p-2.5 border border-concrete-dark">
+              <div className="font-display text-3xl text-amber mb-1">{a.name}</div>
+              <div className="font-mono text-3xl text-concrete-light leading-relaxed mb-1">{a.effect}</div>
+              <div className="font-mono text-base text-red-stamp tracking-[1px]">Cost: {a.cost}</div>
             </div>
           ))}
         </div>
@@ -36,11 +36,11 @@ export default function ReferencePage() {
 
       {/* Words of Power */}
       <Section label="Weird Operations — Words of Power">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 6 }}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-1.5">
           {WORDS_OF_POWER.map((w) => (
-            <div key={w.name} style={{ padding: '8px 10px', border: '1px solid var(--concrete-dark)' }}>
-              <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--off-white)', marginBottom: 3 }}>{w.name}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 30, color: 'var(--concrete)', lineHeight: 1.5 }}>{w.effect}</div>
+            <div key={w.name} className="p-2 border border-concrete-dark">
+              <div className="font-display text-3xl text-off-white mb-0.5">{w.name}</div>
+              <div className="font-mono text-3xl text-concrete leading-relaxed">{w.effect}</div>
             </div>
           ))}
         </div>
@@ -49,13 +49,13 @@ export default function ReferencePage() {
       {/* Skills */}
       <Section label="Skills">
         {(['Physical', 'Investigation', 'Social', 'Weird'] as const).map((cat) => (
-          <div key={cat} style={{ marginBottom: 16 }}>
-            <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, letterSpacing: 3, color: 'var(--amber-dim)', textTransform: 'uppercase', marginBottom: 6 }}>{cat}</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div key={cat} className="mb-4">
+            <div className="font-mono text-base tracking-[3px] text-amber-dim uppercase mb-1.5">{cat}</div>
+            <div className="flex flex-col gap-0.5">
               {SKILLS.filter((s) => s.cat === cat).map((s) => (
-                <div key={s.name} style={{ display: 'flex', gap: 12, padding: '6px 10px', border: '1px solid var(--concrete-dark)' }}>
-                  <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 36, color: 'var(--off-white)', minWidth: 220 }}>{s.name}</div>
-                  <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--amber-dim)', letterSpacing: 1, alignSelf: 'center' }}>{s.attr}</div>
+                <div key={s.name} className="flex gap-3 p-1.5 border border-concrete-dark">
+                  <div className="font-mono text-4xl text-off-white min-w-[220px]">{s.name}</div>
+                  <div className="font-mono text-base text-amber-dim tracking-[1px] self-center">{s.attr}</div>
                 </div>
               ))}
             </div>
@@ -65,15 +65,15 @@ export default function ReferencePage() {
 
       {/* Expendables */}
       <Section label="Expendables Deck">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <div className="flex flex-col gap-1">
           {EXPENDABLES.map((e) => (
-            <div key={e.name} style={{ padding: '10px 12px', border: '1px solid var(--concrete-dark)' }}>
-              <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', marginBottom: 4 }}>
-                <div style={{ fontFamily: '"Special Elite", serif', fontSize: 30, color: 'var(--off-white)' }}>{e.name}</div>
-                <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 17, color: 'var(--concrete-dark)', letterSpacing: 2 }}>{e.cat}</div>
+            <div key={e.name} className="p-2.5 border border-concrete-dark">
+              <div className="flex gap-2.5 items-baseline mb-1">
+                <div className="font-display text-3xl text-off-white">{e.name}</div>
+                <div className="font-mono text-base text-concrete-dark tracking-[2px]">{e.cat}</div>
               </div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 30, color: 'var(--concrete-light)', lineHeight: 1.5, marginBottom: 2 }}>{e.effect}</div>
-              <div style={{ fontFamily: '"Share Tech Mono", monospace', fontSize: 30, color: 'var(--red-stamp)', lineHeight: 1.5 }}>Drawback: {e.drawback}</div>
+              <div className="font-mono text-3xl text-concrete-light leading-relaxed mb-0.5">{e.effect}</div>
+              <div className="font-mono text-3xl text-red-stamp leading-relaxed">Drawback: {e.drawback}</div>
             </div>
           ))}
         </div>
@@ -84,8 +84,8 @@ export default function ReferencePage() {
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div style={{ marginBottom: 28 }}>
-      <div className="section-label" style={{ marginBottom: 12 }}>{label}</div>
+    <div className="mb-7">
+      <div className="section-label mb-3">{label}</div>
       {children}
     </div>
   )
