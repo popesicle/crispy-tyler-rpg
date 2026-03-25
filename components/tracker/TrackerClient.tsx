@@ -180,7 +180,8 @@ export default function TrackerClient({ character }: Props) {
             <ResourceBar
               type="fatigue"
               value={fatigue}
-              max={character.attrs.CON}
+              max={character.attrs.CON + 2}
+              baseValue={character.attrs.CON}
               onChange={updateFatigue}
             />
           </div>
@@ -190,7 +191,8 @@ export default function TrackerClient({ character }: Props) {
             <ResourceBar
               type="stress"
               value={stress}
-              max={character.attrs.WIS}
+              max={character.attrs.WIS + 2}
+              baseValue={character.attrs.WIS}
               onChange={updateStress}
             />
           </div>

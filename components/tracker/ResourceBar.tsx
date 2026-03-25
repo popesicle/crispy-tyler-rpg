@@ -4,11 +4,14 @@ interface Props {
   type: 'fatigue' | 'stress'
   value: number
   max: number
+  baseValue?: number
   onChange: (val: number) => void
 }
 
-export default function ResourceBar({ type, value, max, onChange }: Props) {
+export default function ResourceBar({ type, value, max, baseValue, onChange }: Props) {
   const isFatigue = type === 'fatigue'
+  const attrLabel = isFatigue ? 'CON' : 'WIS'
+  const displayLabel = baseValue !== undefined ? `${attrLabel}: ${baseValue} + Prof: 2` : `${attrLabel}: ${max}`
 
   const badge = isFatigue
     ? value > max
@@ -38,7 +41,7 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
     <div>
       <div className="flex items-center justify-between mb-2">
         <div className="section-label m-0">
-          {isFatigue ? `Fatigue (CON: ${max})` : `Stress (WIS: ${max})`}
+          {isFatigue ? `Fatigue (${displayLabel})` : `Stress (${displayLabel})`}
         </div>
         {badge && (
           <div
@@ -94,7 +97,7 @@ export default function ResourceBar({ type, value, max, onChange }: Props) {
       {isFatigue && (
         <div className="mt-1.5 font-mono text-xs text-concrete-dark tracking-[1px]">
           At {max}: <span className="text-red-stamp">WOUNDED</span> (−1 die physical) &nbsp;|&nbsp; Overflow:{' '}
-          <span className="text-[#b02020]">DOWN</span>
+          <span className="text-[#b02020]">DOWN</span> (−1 die all actions)
         </div>
       )}
     </div>
