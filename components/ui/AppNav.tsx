@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
@@ -12,6 +13,15 @@ const NAV_LINKS = [
 
 export default function AppNav({ username }: { username: string }) {
   const pathname = usePathname()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+  }
 
   return (
     <header className="border-b border-concrete-dark bg-black/30 px-4">
@@ -24,8 +34,8 @@ export default function AppNav({ username }: { username: string }) {
           FRC
         </Link>
 
-        {/* Nav links */}
-        <nav className="flex gap-0.5 flex-1">
+        {/* Nav links — desktop */}
+        <nav className="hidden md:flex gap-0.5 flex-1">
           {NAV_LINKS.map((link) => {
             const active = pathname === link.href || pathname.startsWith(link.href + '/')
             return (
@@ -44,8 +54,11 @@ export default function AppNav({ username }: { username: string }) {
           })}
         </nav>
 
-        {/* Agent + logout */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Spacer for desktop */}
+        <div className="hidden md:flex flex-1" />
+
+        {/* Agent + logout — desktop */}
+        <div className="hidden md:flex items-center gap-3 shrink-0">
           <span className="font-mono text-[30px] tracking-[2px] text-concrete uppercase">
             {username}
           </span>
@@ -56,7 +69,67 @@ export default function AppNav({ username }: { username: string }) {
             Sign Out
           </button>
         </div>
+
+        {/* Hamburger button — mobile */}
+        <button
+          onClick={toggleMobileMenu}
+          className="md:hidden ml-auto text-amber hover:text-amber-dim transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden border-t border-concrete-dark bg-black/50">
+          <div className="flex flex-col">
+            {NAV_LINKS.map((link) => {
+              const active = pathname === link.href || pathname.startsWith(link.href + '/')
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className={`font-mono text-base tracking-[2px] uppercase no-underline px-4 py-3 border-l-2 transition-colors duration-150 ${
+                    active
+                      ? 'text-amber border-amber-dim bg-white/[0.02]'
+                      : 'text-concrete border-concrete-dark hover:bg-white/[0.01]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+            <div className="border-t border-concrete-dark px-4 py-3">
+              <div className="font-mono text-sm tracking-[2px] text-concrete uppercase mb-3">
+                {username}
+              </div>
+              <button
+                className="btn w-full text-center text-sm tracking-[2px] px-3 py-2"
+                onClick={() => {
+                  closeMobileMenu()
+                  signOut({ callbackUrl: '/login' })
+                }}
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </nav>
+      )}
     </header>
   )
 }
