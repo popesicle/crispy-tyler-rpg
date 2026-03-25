@@ -26,8 +26,8 @@ export default function ReferencePage() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2">
           {AURAS.map((a) => (
             <div key={a.name} className="p-2.5 border border-concrete-dark">
-              <div className="font-display text-3xl text-amber mb-1">{a.name}</div>
-              <div className="font-mono text-3xl text-concrete-light leading-relaxed mb-1">{a.effect}</div>
+              <div className="font-display text-xl text-amber mb-1">{a.name}</div>
+              <div className="font-mono text-2xl text-concrete-light leading-relaxed mb-1">{a.effect}</div>
               <div className="font-mono text-base text-red-stamp tracking-[1px]">Cost: {a.cost}</div>
             </div>
           ))}
@@ -39,8 +39,8 @@ export default function ReferencePage() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-1.5">
           {WORDS_OF_POWER.map((w) => (
             <div key={w.name} className="p-2 border border-concrete-dark">
-              <div className="font-display text-3xl text-off-white mb-0.5">{w.name}</div>
-              <div className="font-mono text-3xl text-concrete leading-relaxed">{w.effect}</div>
+              <div className="font-display text-2xl text-off-white mb-0.5">{w.name}</div>
+              <div className="font-mono text-xl text-concrete leading-relaxed">{w.effect}</div>
             </div>
           ))}
         </div>
@@ -69,11 +69,11 @@ export default function ReferencePage() {
           {EXPENDABLES.map((e) => (
             <div key={e.name} className="p-2.5 border border-concrete-dark">
               <div className="flex gap-2.5 items-baseline mb-1">
-                <div className="font-display text-3xl text-off-white">{e.name}</div>
+                <div className="font-display text-2xl text-off-white">{e.name}</div>
                 <div className="font-mono text-base text-concrete-dark tracking-[2px]">{e.cat}</div>
               </div>
-              <div className="font-mono text-3xl text-concrete-light leading-relaxed mb-0.5">{e.effect}</div>
-              <div className="font-mono text-3xl text-red-stamp leading-relaxed">Drawback: {e.drawback}</div>
+              <div className="font-mono text-xl text-concrete-light leading-relaxed mb-0.5">{e.effect}</div>
+              <div className="font-mono text-xl text-red-stamp leading-relaxed">Drawback: {e.drawback}</div>
             </div>
           ))}
         </div>

@@ -54,7 +54,7 @@ export default function RegisterPage() {
           FRC
         </div>
         <div
-          className="font-mono text-3xl tracking-[4px] text-concrete uppercase mt-1"
+          className="font-mono text-2xl tracking-[4px] text-concrete uppercase mt-1"
         >
           Personnel Registration
         </div>
@@ -65,7 +65,7 @@ export default function RegisterPage() {
         className="border border-concrete-dark bg-white/[0.02] p-7"
       >
         <div
-          className="bg-[rgba(139,26,26,0.15)] border border-red-stamp text-concrete-light font-mono text-3xl tracking-[2px] p-3 mb-6 leading-relaxed"
+          className="bg-[rgba(139,26,26,0.15)] border border-red-stamp text-concrete-light font-mono text-2xl tracking-[2px] p-3 mb-6 leading-relaxed"
         >
           New operative registration. Credentials will be stored in secure FRC records.
           All activity is monitored and logged.
@@ -78,7 +78,7 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
+              className="block font-mono text-2xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Agent ID
             </label>
@@ -96,7 +96,7 @@ export default function RegisterPage() {
 
           <div className="mb-4">
             <label
-              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
+              className="block font-mono text-2xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Passphrase
             </label>
@@ -114,7 +114,7 @@ export default function RegisterPage() {
 
           <div className="mb-6">
             <label
-              className="block font-mono text-3xl tracking-[3px] text-amber-dim uppercase mb-1.5"
+              className="block font-mono text-2xl tracking-[3px] text-amber-dim uppercase mb-1.5"
             >
               Confirm Passphrase
             </label>

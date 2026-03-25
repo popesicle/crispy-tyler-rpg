@@ -118,7 +118,7 @@ export default function StepAttributes({ state, onChange }: Props) {
                   onClick={() => adjust(key, -1)}
                   disabled={val <= attributeMin}
                   className={cn(
-                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all',
+                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-2xl transition-all',
                     val <= attributeMin && 'opacity-30'
                   )}
                 >
@@ -133,7 +133,7 @@ export default function StepAttributes({ state, onChange }: Props) {
                   onClick={() => adjust(key, 1)}
                   disabled={val >= attributeMax || remaining <= 0}
                   className={cn(
-                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-3xl transition-all',
+                    'w-7 h-7 bg-transparent border border-amber-dim text-amber cursor-pointer flex items-center justify-center leading-none font-mono text-2xl transition-all',
                     (val >= attributeMax || remaining <= 0) && 'opacity-30'
                   )}
                 >
