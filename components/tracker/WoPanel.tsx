@@ -44,7 +44,7 @@ export default function WoPanel({ activeAuras, onChange }: Props) {
                 />
                 <div
                   className={cn(
-                    'font-display text-[30px] tracking-[1px]',
+                    'font-display text-3xl tracking-[1px]',
                     active ? 'text-amber' : 'text-concrete'
                   )}
                 >

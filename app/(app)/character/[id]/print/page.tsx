@@ -57,7 +57,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
             </div>
             <div className="text-right">
               <div
-                className="font-display text-[30px] tracking-[4px] border-2 px-3 py-1 inline-block opacity-85 text-[#8b1a1a] border-[#8b1a1a] -rotate-[3deg]"
+                className="font-display text-3xl tracking-[4px] border-2 px-3 py-1 inline-block opacity-85 text-[#8b1a1a] border-[#8b1a1a] -rotate-[3deg]"
               >
                 FRC
               </div>
@@ -67,7 +67,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
                 {c.id.slice(0, 8).toUpperCase()}
               </div>
               <div
-                className="font-display text-[30px] tracking-[3px] mt-0.5 text-[#8b1a1a]"
+                className="font-display text-3xl tracking-[3px] mt-0.5 text-[#8b1a1a]"
               >
                 CLEARANCE: ██████
               </div>
@@ -86,7 +86,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
                     key={k}
                     className="border px-1.5 py-1.5 text-center border-[#8a8880]"
                   >
-                    <div className="font-display text-[30px] text-[var(--ink)]">
+                    <div className="font-display text-3xl text-[var(--ink)]">
                       {c.attrs[k]}
                     </div>
                     <div className="text-base tracking-[2px] text-[#8a6e35]">{k}</div>
@@ -136,10 +136,10 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
               {expertSkill && (
                 <div className="mb-2">
                   <div className="text-base tracking-[2px] mb-0.75 text-[#8a6e35]">EXPERT</div>
-                  <div className="font-display text-[30px] text-[var(--ink)]">
+                  <div className="font-display text-3xl text-[var(--ink)]">
                     {expertSkill.name}
                   </div>
-                  <div className="text-[30px] tracking-[0.05em] text-[#8a8880]">
+                  <div className="text-3xl tracking-[0.05em] text-[#8a8880]">
                     {expertSkill.specializations.join(' · ')}
                   </div>
                 </div>
@@ -153,8 +153,8 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
             </PrintSection>
 
             <PrintSection label="Talent">
-              <div className="font-display text-[30px] mb-1">{c.talent}</div>
-              <div className="text-[30px] leading-relaxed text-[#5a5a5a]">{c.talentDesc}</div>
+              <div className="font-display text-3xl mb-1">{c.talent}</div>
+              <div className="text-3xl leading-relaxed text-[#5a5a5a]">{c.talentDesc}</div>
             </PrintSection>
 
             <PrintSection label="Expendables">
@@ -192,7 +192,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
         {c.backstory && (
           <div className="mt-3.5">
             <PrintSection label="Personnel Notes">
-              <p className="text-[30px] leading-relaxed m-0 text-[#5a5a5a]">{c.backstory}</p>
+              <p className="text-3xl leading-relaxed m-0 text-[#5a5a5a]">{c.backstory}</p>
             </PrintSection>
           </div>
         )}

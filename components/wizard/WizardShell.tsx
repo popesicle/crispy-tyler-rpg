@@ -117,11 +117,11 @@ export default function WizardShell() {
       <div className="mb-6">
         <div className="section-label">Character Creation</div>
         <div className="flex items-center justify-between">
-          <h1 className="font-display text-[30px] text-amber m-0 tracking-[2px]">
+          <h1 className="font-display text-3xl text-amber m-0 tracking-[2px]">
             New Operative File
           </h1>
           <button
-            className="btn text-[30px] tracking-[2px] px-3 py-1.25"
+            className="btn text-3xl tracking-[2px] px-3 py-1.25"
             onClick={() => setSidebarOpen((o) => !o)}
           >
             {sidebarOpen ? 'Hide' : 'Show'} Reference Builds
@@ -147,7 +147,7 @@ export default function WizardShell() {
             >
               <div
                 className={cn(
-                  'w-[22px] h-[22px] border flex items-center justify-center font-mono text-[30px]',
+                  'w-[22px] h-[22px] border flex items-center justify-center font-mono text-3xl',
                   active ? 'border-amber bg-amber-deep text-amber' : done ? 'border-olive bg-[rgba(107,122,62,0.2)] text-olive' : 'border-concrete-dark bg-transparent text-concrete-dark'
                 )}
               >
@@ -203,7 +203,7 @@ export default function WizardShell() {
 
               <div
                 className={cn(
-                  'font-mono text-[30px] tracking-[2px]',
+                  'font-mono text-3xl tracking-[2px]',
                   ok ? 'text-olive' : 'text-red-stamp'
                 )}
               >
@@ -239,7 +239,7 @@ export default function WizardShell() {
               <div className="font-mono text-base tracking-[3px] text-red-stamp uppercase mb-1">
                 Inspiration Only
               </div>
-              <div className="font-mono text-[30px] text-concrete tracking-[1px] leading-[1.4]">
+              <div className="font-mono text-3xl text-concrete tracking-[1px] leading-[1.4]">
                 Viewing these does not change your character.
               </div>
             </div>
@@ -256,11 +256,11 @@ export default function WizardShell() {
                       <div className="font-display text-base text-off-white tracking-[1px]">
                         {build.name}
                       </div>
-                      <span className="text-concrete text-[30px]">{open ? '▲' : '▼'}</span>
+                      <span className="text-concrete text-3xl">{open ? '▲' : '▼'}</span>
                     </button>
 
                     {open && (
-                      <div className="px-3.5 pb-3.5 text-[30px]">
+                      <div className="px-3.5 pb-3.5 text-3xl">
                         <div className="font-mono text-concrete tracking-[1px] italic mb-2.5 leading-relaxed">
                           {build.tagline}
                         </div>
@@ -268,7 +268,7 @@ export default function WizardShell() {
                         <BuildRow label="Attrs">
                           <div className="flex gap-1 flex-wrap">
                             {Object.entries(build.attrs).map(([k, v]) => (
-                              <span key={k} className="text-amber font-mono text-[30px]">
+                              <span key={k} className="text-amber font-mono text-3xl">
                                 {k}:{v}
                               </span>
                             ))}
@@ -276,7 +276,7 @@ export default function WizardShell() {
                         </BuildRow>
 
                         <BuildRow label="Expert">
-                          <span className="text-amber font-mono text-[30px]">
+                          <span className="text-amber font-mono text-3xl">
                             {build.expertSkill}
                           </span>
                           <div className="text-concrete font-mono text-base mt-0.5">
@@ -286,7 +286,7 @@ export default function WizardShell() {
 
                         <BuildRow label="Trained">
                           {build.trainedSkills.map((s) => (
-                            <div key={s} className="text-concrete-light font-mono text-[30px]">
+                            <div key={s} className="text-concrete-light font-mono text-3xl">
                               {s}
                             </div>
                           ))}

@@ -59,11 +59,11 @@ export default function AppNav({ username }: { username: string }) {
 
         {/* Agent + logout — desktop */}
         <div className="hidden md:flex items-center gap-3 shrink-0">
-          <span className="font-mono text-[30px] tracking-[2px] text-concrete uppercase">
+          <span className="font-mono text-3xl tracking-[2px] text-concrete uppercase">
             {username}
           </span>
           <button
-            className="btn text-[30px] tracking-[2px] px-[10px] py-1"
+            className="btn text-3xl tracking-[2px] px-[10px] py-1"
             onClick={() => signOut({ callbackUrl: '/login' })}
           >
             Sign Out

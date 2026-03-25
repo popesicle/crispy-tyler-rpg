@@ -124,7 +124,7 @@ export default function ClockWidget({ clocks, onChange }: Props) {
 
       {/* Clock list */}
       {clocks.length === 0 && !adding && (
-        <div className="font-mono text-[30px] text-concrete-dark tracking-[2px] text-center py-4 border border-concrete-dark">
+        <div className="font-mono text-3xl text-concrete-dark tracking-[2px] text-center py-4 border border-concrete-dark">
           No active clocks.
         </div>
       )}
@@ -214,7 +214,7 @@ function ClockCard({
       </svg>
 
       {/* Filled count */}
-      <div className="font-mono text-[30px] text-concrete tracking-[1px]">
+      <div className="font-mono text-3xl text-concrete tracking-[1px]">
         {clock.filled}/{clock.segments}
       </div>
 
