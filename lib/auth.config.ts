@@ -14,7 +14,7 @@ export const authConfig: NextAuthConfig = {
       return token
     },
     session({ session, token }) {
-      if (token.id) session.user.id = token.id as string
+      session.user.id = (token.id ?? token.sub) as string
       return session
     },
   },
