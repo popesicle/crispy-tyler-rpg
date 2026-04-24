@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
+import type { Prisma } from '@prisma/client'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { validateCharacterUpdates } from '@/lib/character-validation'
 
 async function getOwnedCharacter(id: string, userId: string) {
   const character = await prisma.character.findUnique({ where: { id } })
@@ -26,17 +28,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   const body = await req.json()
-
-  // Only allow updating mutable fields — never userId or createdAt
-  const allowed = ['name', 'codename', 'backstory', 'attrs', 'skills', 'talent', 'talentDesc',
-    'armor', 'weapons', 'expendables', 'bgTags', 'fatigue', 'stress', 'clocks', 'activeAuras', 'notes']
-  const updates = Object.fromEntries(
-    Object.entries(body).filter(([k]) => allowed.includes(k))
-  )
+  const updates = validateCharacterUpdates(body)
+  if (!updates.ok) return NextResponse.json({ error: updates.error }, { status: 400 })
 
   const updated = await prisma.character.update({
     where: { id: params.id },
-    data: updates,
+    data: updates.data as Prisma.CharacterUpdateInput,
   })
 
   return NextResponse.json(updated)
