@@ -8,9 +8,10 @@ import PrintTrigger from '@/components/ui/PrintTrigger'
 
 const ATTR_KEYS = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'] as const
 
-export default async function PrintPage({ params }: { params: { id: string } }) {
+export default async function PrintPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await auth()
-  const raw = await prisma.character.findUnique({ where: { id: params.id } })
+  const raw = await prisma.character.findUnique({ where: { id } })
 
   if (!raw || raw.userId !== session!.user.id) notFound()
 
