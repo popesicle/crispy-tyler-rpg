@@ -8,21 +8,23 @@ async function getOwnedCharacter(id: string, userId: string) {
   return character
 }
 
-export async function GET(_req: Request, { params }: { params: { id: string } }) {
+export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await auth()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const character = await getOwnedCharacter(params.id, session.user.id)
+  const character = await getOwnedCharacter(id, session.user.id)
   if (!character) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   return NextResponse.json(character)
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await auth()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const existing = await getOwnedCharacter(params.id, session.user.id)
+  const existing = await getOwnedCharacter(id, session.user.id)
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   const body = await req.json()
@@ -35,20 +37,21 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   )
 
   const updated = await prisma.character.update({
-    where: { id: params.id },
+    where: { id },
     data: updates,
   })
 
   return NextResponse.json(updated)
 }
 
-export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await auth()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const existing = await getOwnedCharacter(params.id, session.user.id)
+  const existing = await getOwnedCharacter(id, session.user.id)
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  await prisma.character.delete({ where: { id: params.id } })
+  await prisma.character.delete({ where: { id } })
   return NextResponse.json({ ok: true })
 }
