@@ -77,7 +77,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
         {/* Two-column body */}
         <div className="print-grid grid grid-cols-2 gap-5 mb-5">
-          {/* Left: Attributes + Tracks + Loadout */}
+          {/* Left: Attributes + Tracks */}
           <div className="flex flex-col gap-3.5">
             <PrintSection label="Attributes">
               <div className="print-section grid grid-cols-3 gap-1">
@@ -114,23 +114,9 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
               </div>
             </PrintSection>
 
-            <PrintSection label="Loadout">
-              <div className="text-lg mb-1 text-[#6b5428] tracking-[0.05em]">
-                {c.armor.toUpperCase()} ARMOR
-              </div>
-              {c.weapons.map((w, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between py-0.75 border-b text-lg border-b-[#ccc]"
-                >
-                  <span>{w.name}</span>
-                  <span className="text-[#8a6e35]">{w.damage}</span>
-                </div>
-              ))}
-            </PrintSection>
           </div>
 
-          {/* Right: Skills + Talent + Expendables */}
+          {/* Right: Skills + Loadout + Expendables + Talent */}
           <div className="flex flex-col gap-3.5">
             <PrintSection label="Skills">
               {expertSkill && (
@@ -152,9 +138,19 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
               ))}
             </PrintSection>
 
-            <PrintSection label="Talent">
-              <div className="font-display text-3xl mb-1">{c.talent}</div>
-              <div className="text-3xl leading-relaxed text-[#5a5a5a]">{c.talentDesc}</div>
+            <PrintSection label="Loadout">
+              <div className="text-lg mb-1 text-[#6b5428] tracking-[0.05em]">
+                {c.armor.toUpperCase()} ARMOR
+              </div>
+              {c.weapons.map((w, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between py-0.75 border-b text-lg border-b-[#ccc]"
+                >
+                  <span>{w.name}</span>
+                  <span className="text-[#8a6e35]">{w.damage}</span>
+                </div>
+              ))}
             </PrintSection>
 
             <PrintSection label="Expendables">
@@ -170,6 +166,12 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
             </PrintSection>
           </div>
         </div>
+
+        {/* Talent */}
+        <PrintSection label="Talent">
+          <div className="font-display text-3xl mb-1">{c.talent}</div>
+          <div className="text-3xl leading-relaxed text-[#5a5a5a]">{c.talentDesc}</div>
+        </PrintSection>
 
         {/* Background Tags */}
         <PrintSection label="Background Tags">

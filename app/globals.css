@@ -285,7 +285,7 @@ textarea.input {
 
   .print-sheet {
     min-height: auto !important;
-    padding: 0 !important;
+    padding: 0.35in !important;
   }
 
   .print-section {
