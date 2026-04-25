@@ -271,4 +271,30 @@ textarea.input {
   .no-print {
     display: none !important;
   }
+
+  @page {
+    size: letter;
+    margin: 0.00in;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-sheet {
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-grid {
+    align-items: start;
+  }
 }
+

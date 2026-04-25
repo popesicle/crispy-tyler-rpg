@@ -22,7 +22,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
     <>
       {/* Print button — hidden in actual print */}
       <div className="no-print px-6 py-4 border-b bg-[#f0ece0]">
-        <PrintTrigger />
+        <PrintTrigger characterId={c.id} />
         <a
           href={`/character/${c.id}`}
           className="ml-4 font-mono text-3xl text-[#6b5428]"
@@ -33,7 +33,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
       {/* Print sheet */}
       <div
-        className="font-mono min-h-screen px-10 py-8 bg-[var(--paper)] text-[var(--ink)]"
+        className="print-sheet font-mono min-h-screen px-10 py-8 bg-[var(--paper)] text-[var(--ink)]"
       >
         {/* Header */}
         <div className="mb-5 border-b-2 pb-3 border-b-[var(--ink)]">
@@ -76,11 +76,11 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
         </div>
 
         {/* Two-column body */}
-        <div className="grid grid-cols-2 gap-5 mb-5">
+        <div className="print-grid grid grid-cols-2 gap-5 mb-5">
           {/* Left: Attributes + Tracks + Loadout */}
           <div className="flex flex-col gap-3.5">
             <PrintSection label="Attributes">
-              <div className="grid grid-cols-3 gap-1">
+              <div className="print-section grid grid-cols-3 gap-1">
                 {ATTR_KEYS.map((k) => (
                   <div
                     key={k}
@@ -211,7 +211,7 @@ export default async function PrintPage({ params }: { params: { id: string } }) 
 
 function PrintSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div>
+    <div className="print-section">
       <div
         className="font-mono text-3xl tracking-[4px] uppercase border-b pb-0.75 mb-2 text-[#8a6e35] border-b-[#8a8880]"
       >

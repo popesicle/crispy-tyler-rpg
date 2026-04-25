@@ -24,7 +24,7 @@ export default function AppNav({ username }: { username: string }) {
   }
 
   return (
-    <header className="border-b border-concrete-dark bg-black/30 px-4">
+    <header className="no-print border-b border-concrete-dark bg-black/30 px-4">
       <div className="mx-auto max-w-[960px] flex items-center gap-0 h-[52px]">
         {/* Logo */}
         <Link
