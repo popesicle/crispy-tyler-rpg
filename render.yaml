@@ -2,7 +2,7 @@ services:
   - type: web
     name: frc
     env: node
-    buildCommand: npx prisma generate && npx prisma migrate deploy && next build
+    buildCommand: npx playwright install chromium && npx prisma generate && npx prisma migrate deploy && next build
     startCommand: next start
     envVars:
       - key: DATABASE_URL
